@@ -1,0 +1,8 @@
+{
+  "name": "bills-pc",
+  "version": "1.0.0",
+  "description": "pokemon card portfolio application",
+  "main": "index.js",
+  "author": "kandrews",
+  "license": "MIT"
+}
