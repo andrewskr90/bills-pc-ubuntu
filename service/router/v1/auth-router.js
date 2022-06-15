@@ -1,21 +1,37 @@
 const authRouter = require('express').Router()
-const { authenticateUser, createSession, encryptSession, verifySession } = require('../../middleware/auth-middleware')
+const { 
+    registerUser, 
+    loginUser, 
+    createSession, 
+    encryptSession, 
+    verifySession,
+    decodeJwt
+ } = require('../../middleware/auth-middleware')
 
-authRouter.post('/login', authenticateUser, createSession, encryptSession, (req, res, next) => {
-    res.status(200).json({
-        message: 'Welcome, User',
-        date: Date.now(),
+authRouter.post('/register', 
+registerUser, createSession, encryptSession, 
+(req, res, next) => {
+    res.status(200).send({
+        message: 'User registered!',
         sessionJwt: req.sessionJwt
     })
 })
 
-authRouter.post('/cookie', verifySession, (req, res, next) => {
-    if (!verifiedSession) {
-        next({ message: 'undefined session'})
-    }
+authRouter.post('/login', 
+    loginUser, createSession, encryptSession,
+    (req, res, next) => {
+    res.status(200).send({
+        message: 'Welcome, user!',
+        sessionJwt: req.sessionJwt
+    })
+})
+
+//authorize cookie
+authRouter.get('/', verifySession, decodeJwt, (req, res, next) => {
+    const session = req.decodedJwt
     res.status(200).json({
         message: 'Welcome, User',
-        verifiedCookies: req.verifiedSession
+        session: session
     })
 })
 
