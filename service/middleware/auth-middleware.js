@@ -1,9 +1,8 @@
-const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken')
 require('dotenv')
 
-const registerUser = (req, res, next) => {
-    const { user_name, user_email } = req.body
+const formatUser = (req, res, next) => {
+    const { user_name, user_email, user_password, user_favorite_gen } = req.body
     if (!user_name) {
         next({
             message: 'Username required.'
@@ -13,18 +12,22 @@ const registerUser = (req, res, next) => {
             message: 'Email required.'
         })
     }
-    //proxy response from db
-    const userObject = {
-        user_id: '123',
+
+    const formattedUser = {
         user_name,
+        user_password,
         user_role: 'Trainer',
-        user_email
+        user_email,
+        user_favorite_gen,
+        // created_at: Date.UTC()
     }
-    req.userObject = userObject
+    req.user = formattedUser
     next()
 }
 
-const loginUser = (req, res, next) => {
+const prepLoginFilter = (req, res, next) => {
+    const { user_name, user_password } = req.body
+    req.filter = { user_name, user_password }
     next()
 }
 
@@ -90,8 +93,8 @@ const decodeJwt = async (req, res, next) => {
 }
 
 module.exports = {
-    registerUser,
-    loginUser,
+    formatUser,
+    prepLoginFilter,
     createSession,
     encryptSession,
     verifySession,
