@@ -9,7 +9,11 @@ const addUserMySQL = (req, res, next) => {
     const query = `INSERT INTO users (${columns}) VALUES (${values});`
 
     connection.query(query, (err, results) => {
-        if (err) next(err)
+        if (err.code === 'ER_DUP_ENTRY') {
+            return next({ status: 409, message: 'Trainer name taken.'})
+        } else if (err) {
+            return next(err)
+        }
         req.results = results
         next()
     })

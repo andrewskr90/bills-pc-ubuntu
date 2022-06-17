@@ -8,10 +8,16 @@ const {
     decodeJwt,
     encryptPassword,
     authenticateUser,
-    prepUserFilter
+    prepUserFilter,
+    checkRegisterValues
 } = require('../../middleware/auth-middleware')
 
-authRouter.post('/register', formatUser, encryptPassword, addUserMySQL, async (req, res, next) => {
+authRouter.post('/register', 
+    checkRegisterValues,
+    formatUser, 
+    encryptPassword, 
+    addUserMySQL,
+    async (req, res, next) => {
     res.status(200).json(res.results)
 })
 
