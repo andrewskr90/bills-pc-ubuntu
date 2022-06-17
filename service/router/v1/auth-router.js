@@ -1,35 +1,38 @@
 const authRouter = require('express').Router()
-const { addUserMySQL, findUsersByMySQL } = require('../../../db/queries')
+const { addUserMySQL, findUsersByFilterMySQL } = require('../../../db/queries')
 const { 
     formatUser, 
-    prepLoginFilter, 
     createSession, 
-    encryptSession, 
+    encryptSessionCookie, 
     verifySession,
-    decodeJwt
+    decodeJwt,
+    encryptPassword,
+    authenticateUser,
+    prepUserFilter
 } = require('../../middleware/auth-middleware')
 
-authRouter.post('/register', formatUser, addUserMySQL, async (req, res, next) => {
+authRouter.post('/register', formatUser, encryptPassword, addUserMySQL, async (req, res, next) => {
     res.status(200).json(res.results)
 })
 
-authRouter.post('/login', 
-    prepLoginFilter, findUsersByMySQL, 
-    // createSession, encryptSession,
+authRouter.post('/login',
+    prepUserFilter,
+    findUsersByFilterMySQL, 
+    authenticateUser,
+    createSession, 
+    encryptSessionCookie,
     (req, res, next) => {
     res.status(200).send({
         message: 'Welcome, user!',
-        data: req.results,
-        sessionJwt: req.sessionJwt
+        data: req.claims
     })
 })
 
 //authorize cookie
 authRouter.get('/', verifySession, decodeJwt, (req, res, next) => {
-    const session = req.decodedJwt
     res.status(200).json({
-        message: 'Welcome, User',
-        session: session
+        message: 'Welcome, user!',
+        data: req.decodedJwt
     })
 })
 

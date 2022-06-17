@@ -68,14 +68,14 @@ const Registration = () => {
             <label>Password</label>
             <input
                 name='user_password'
-                type='string'
+                type='password'
                 value={formValues.user_password}
                 onChange={handleChange}
             />
             <label>Repeat Password</label>
             <input
                 name='repeat_user_password'
-                type='string'
+                type='password'
                 value={formValues.repeat_user_password}
                 onChange={handleChange}
             />

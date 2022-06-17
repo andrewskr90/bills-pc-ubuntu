@@ -28,10 +28,9 @@ const Login = () => {
             data: formValues,
             withCredentials: true
         }
-        console.log(axiosOptions.data)
         axios(axiosOptions).then(res => {
                 console.log(res.data)
-                // setResponse(res.message)
+                setErrorMessage('')
             }).catch(err => {
                 console.log(err.response)
                 setErrorMessage(err.response.data.message)
@@ -51,7 +50,7 @@ const Login = () => {
             <label>Password</label>
             <input
                 name='user_password'
-                type='string'
+                type='password'
                 value={formValues.user_password}
                 onChange={handleChange}
             />
