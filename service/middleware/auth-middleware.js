@@ -1,17 +1,39 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
+const isOnlyLetters = (string) => {
+    return /^[a-zA-Z]+$/.test(string)
+}
+
+const checkRegisterValues = (req, res, next) => {
+    const { user_name, user_email, user_password, repeat_user_password, user_favorite_gen } = req.body
+
+    const onlyLetters = isOnlyLetters(user_name)
+    
+    if (!user_name) {
+        next({ status: 400, message: 'Username required.' })
+    } else if (!onlyLetters) {
+        next({ status: 400, message: 'Username can only have letters.'})
+    } else if (!user_email) {
+        next({ status: 400, message: 'Email required.' })
+    } else if (!user_favorite_gen) {
+        next({ status: 400, message: 'Favorite gen required.' })
+    } else if (!user_password) {
+        next({ status: 400, message: 'Password required.' })
+    } else if (!repeat_user_password) {
+        next({ status: 400, message: 'Confirm password.' })
+    } else if (user_name.length < 3) {
+        next({ status: 400, message: 'Trainer name must be at least 3 letters.' })
+    } else if (user_password.length < 7) {
+        next({ status: 400, message: 'Password must be at least 7 characters long.' })
+    } else if (user_password !== repeat_user_password) {
+        next({ status: 400, message: 'Passwords do not match.' })
+    } 
+    next()
+}
+
 const formatUser = (req, res, next) => {
     const { user_name, user_email, user_password, user_favorite_gen } = req.body
-    if (!user_name) {
-        next({
-            message: 'Username required.'
-        })
-    } else if (!user_email) {
-        next({
-            message: 'Email required.'
-        })
-    }
 
     const formattedUser = {
         user_name,
@@ -68,9 +90,16 @@ const encryptSessionCookie = (req, res, next) => {
 const verifySession = async (req, res, next) => {
     const verifyCookie = () => {
         const parsedCookies = req.signedCookies
+        if (parsedCookies.billsPcSession === undefined) {
+            return next({
+                status: 401,
+                message: 'Missing cookie.'
+            })
+        }
         if (!parsedCookies.billsPcSession) {
-            res.status(400).json({
-                message: 'Inauthentic cookie'
+            return next({
+                status: 401,
+                message: 'Inauthentic cookie.'
             })
         }
         return parsedCookies.billsPcSession
@@ -134,5 +163,6 @@ module.exports = {
     decodeJwt, 
     encryptPassword, 
     authenticateUser,
-    prepUserFilter
+    prepUserFilter,
+    checkRegisterValues
 }
