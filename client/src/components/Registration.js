@@ -32,6 +32,7 @@ const Registration = () => {
             withCredentials: true
         }
         axios(axiosOptions).then(res => {
+                setErrorMessage('')
                 console.log(res.data)
                 // setResponse(res.message)
             }).catch(err => {
