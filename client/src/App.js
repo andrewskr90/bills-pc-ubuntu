@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Registration from './components/Registration'
-import Login from './components/Login'
+import Registration from './components/trainer/Registration'
+import Login from './components/shared/Login'
 import './App.css'
 import axios from 'axios'
 
