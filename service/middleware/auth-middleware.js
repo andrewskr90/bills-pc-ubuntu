@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-require('dotenv')
+const bcrypt = require('bcrypt')
 
 const formatUser = (req, res, next) => {
     const { user_name, user_email, user_password, user_favorite_gen } = req.body
@@ -18,32 +18,34 @@ const formatUser = (req, res, next) => {
         user_password,
         user_role: 'Trainer',
         user_email,
-        user_favorite_gen,
-        // created_at: Date.UTC()
+        user_favorite_gen
     }
     req.user = formattedUser
     next()
 }
 
-const prepLoginFilter = (req, res, next) => {
-    const { user_name, user_password } = req.body
-    req.filter = { user_name, user_password }
-    next()
-}
-
 const createSession = (req, res, next) => {
-    const { user_id, user_name, user_role, user_email } = req.userObject
+    const { user_id,
+         user_name,
+         user_role,
+         user_email,
+         user_favorite_gen,
+         created_date,
+         modified_date } = req.results
     const claims = {
         id: user_id,
         sub: user_name,
         role: user_role,
         email: user_email,
+        favorite_gen: user_favorite_gen,
+        created_date: created_date,
+        modified_date: modified_date,
         iat: Date.now()
     }
+    req.claims = claims
     const jwtOptions = {
         expiresIn: '2h'
     }
-
     try {
         const sessionJwt = jwt.sign(claims, process.env.JWT_SECRET, jwtOptions)
         req.sessionJwt = sessionJwt
@@ -53,7 +55,7 @@ const createSession = (req, res, next) => {
     }
 }
 
-const encryptSession = (req, res, next) => {
+const encryptSessionCookie = (req, res, next) => {
     const cookieOptions = {
         signed: true,
         httpOnly: true,
@@ -92,11 +94,38 @@ const decodeJwt = async (req, res, next) => {
     
 }
 
+const encryptPassword = (req, res, next) => {
+    const rounds = 10
+    bcrypt.hash(req.user.user_password, rounds, (err, hash) => {
+        if (err) {
+            next(err)
+        } else {
+            req.user.user_password = hash
+            next()
+        }
+    })
+}
+
+const authenticateUser = (req, res, next) => {
+    const password = req.body.user_password
+    const hash = req.results.user_password
+    bcrypt.compare(password, hash, (err, result) => {
+        if (err) {
+            next(err)
+        } else if (!result) {
+            next({ message: 'Incorrect username and password.' })
+        } else {
+            next()
+        }
+    })
+}
+
 module.exports = {
     formatUser,
-    prepLoginFilter,
     createSession,
-    encryptSession,
+    encryptSessionCookie,
     verifySession,
-    decodeJwt
+    decodeJwt, 
+    encryptPassword, 
+    authenticateUser
 }

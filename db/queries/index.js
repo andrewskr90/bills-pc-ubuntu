@@ -15,17 +15,12 @@ const addUserMySQL = (req, res, next) => {
     })
 }
 
-
-
 const findUsersByMySQL = (req, res, next) => {
-    //req.filter is key/value pairs to search for
-    const filter = req.filter
-    const queryFilter = filterConcatinated(filter)
-    const query = `SELECT * FROM users WHERE (${queryFilter});`
-
+    const queryFilter = filterConcatinated({ user_name: req.body.user_name})
+    const query = `SELECT * FROM users WHERE ${queryFilter};`
     connection.query(query, (err, results) => {
         if (err) next(err)
-        req.results = results
+        req.results = results[0]
         next()
     })
 }
