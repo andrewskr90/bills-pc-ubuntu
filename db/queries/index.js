@@ -15,11 +15,16 @@ const addUserMySQL = (req, res, next) => {
     })
 }
 
-const findUsersByMySQL = (req, res, next) => {
-    const queryFilter = filterConcatinated({ user_name: req.body.user_name})
+const findUsersByFilterMySQL = (req, res, next) => {
+    const preppedFilter = req.preppedFilter
+    const queryFilter = filterConcatinated(preppedFilter)
     const query = `SELECT * FROM users WHERE ${queryFilter};`
     connection.query(query, (err, results) => {
-        if (err) next(err)
+        if (err) {
+            next(err)
+        } else if (!results[0]) {
+            next({ message: 'Incorrect username and password.' })
+        }
         req.results = results[0]
         next()
     })
@@ -30,5 +35,5 @@ const findUsersByMySQL = (req, res, next) => {
 
 module.exports = {
     addUserMySQL,
-    findUsersByMySQL
+    findUsersByFilterMySQL
 }

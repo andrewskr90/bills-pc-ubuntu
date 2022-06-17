@@ -1,5 +1,5 @@
 const authRouter = require('express').Router()
-const { addUserMySQL, findUsersByMySQL } = require('../../../db/queries')
+const { addUserMySQL, findUsersByFilterMySQL } = require('../../../db/queries')
 const { 
     formatUser, 
     createSession, 
@@ -7,7 +7,8 @@ const {
     verifySession,
     decodeJwt,
     encryptPassword,
-    authenticateUser
+    authenticateUser,
+    prepUserFilter
 } = require('../../middleware/auth-middleware')
 
 authRouter.post('/register', formatUser, encryptPassword, addUserMySQL, async (req, res, next) => {
@@ -15,7 +16,8 @@ authRouter.post('/register', formatUser, encryptPassword, addUserMySQL, async (r
 })
 
 authRouter.post('/login',
-    findUsersByMySQL, 
+    prepUserFilter,
+    findUsersByFilterMySQL, 
     authenticateUser,
     createSession, 
     encryptSessionCookie,
