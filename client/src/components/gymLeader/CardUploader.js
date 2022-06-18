@@ -3,7 +3,7 @@ import Sets from './Sets'
 import CardsToolbar from './CardsToolbar'
 import SetsToolbar from './SetsToolbar'
 import { getSets, getCardsFromSet } from '../../api/pokemon-tcg-io'
-import { postCardsToCards, postSetsToSets } from '../../api/bills-pc'
+import BillsPcService from '../../api/bills-pc'
 import { formatCardsArray, formatSetsArray } from '../../utils/format-data/pokemon-tcg-io'
 
 import React, { useState, useEffect } from 'react'
@@ -65,13 +65,13 @@ const CardUploader = () => {
     const formattedSets = formatSetsArray(setsToPost)
 
     const handlePostSetsToSets = () => {
-        postSetsToSets(formattedSets)
+        BillsPcService.postSetsToSets(formattedSets)
             .then(res => console.log(res))
             .catch(err => console.log(err.message))
     }
 
     const handlePostCardsToCards = () => {
-        postCardsToCards(formattedCurrentSetCards)
+        BillsPcService.postCardsToCards(formattedCurrentSetCards)
             .then(res => console.log(res))
             .catch(err => {
                 console.log(err)
