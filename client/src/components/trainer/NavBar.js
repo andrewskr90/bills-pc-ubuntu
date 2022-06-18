@@ -1,11 +1,11 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 
 const NavBar = (props) => {
   const { user } = props;
-  const history = useHistory();
+  const navigate = useNavigate();
   const clickBillsPC = () => {
-    history.push('/my-collection')
+    naviate('/my-collection')
   }
 
     return (
@@ -16,7 +16,7 @@ const NavBar = (props) => {
           Bill's PC
         </h1>
         <nav>
-          {user ? <a href='logout'>Logout</a> : <a href='login'>Login</a>}
+          
         </nav>
       </header>
     )
