@@ -1,34 +1,39 @@
-import React, { useState } from 'react'
-import Registration from './components/trainer/Registration'
-import Login from './components/shared/Login'
-import './App.css'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
-const App = () => {
-    const [verifyErrorMessage, setVerifyErrorMessage] = useState('')
+import LoginPage from './components/common/LoginPage'
+import TrainerHome from './components/trainer/TrainerHome'
+import GymLeaderHome from './components/gymLeader/GymLeaderHome'
+import TrainerRoute from './utils/auth/TrainerRoute'
+import OnlyUnauthorized from './utils/auth/OnlyUnauthorized'
 
-    const verifyCookie = (e) => {
-        const axiosOptions = {
-            withCredentials: true,
-            url: '/api/v1/auth',
-            baseURL: 'http://localhost:7070'
+import './styles/App.css'
+import BillsPcService from './api/bills-pc'
+
+const App = (props) => {
+    const [userClaims, setUserClaims] = useState('')
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            await BillsPcService.authenticateSession()
+                .then(res =>  {
+                    setUserClaims(res.data)
+                    navigate('/')
+                }).catch(err => {
+                    navigate('/login')
+                })
         }
-        axios(axiosOptions).then(res => {
-            setVerifyErrorMessage('')
-            console.log(res.data)
-        }).catch(err => {
-            console.log(err)
-            setVerifyErrorMessage(err.response.data.message)
-        })
-    }
+        checkAuth()
+    }, [])
     return (<>
-        <h1>Bill's PC</h1>
-        <Registration />
-        <div>
-            <button onClick={verifyCookie}>Verify Cookie</button>
-            <p className='error'>{verifyErrorMessage}</p>
-        </div>
-        <Login />
+        <Routes>
+            <Route path='/login' element={<LoginPage setUserClaims={setUserClaims} />} />
+            {/*Trainer protected routes*/}
+            <Route path='/' element={<TrainerHome />} />
+            {/* Gym Leader protected routes */}
+            <Route path='/gym-leader' element={<GymLeaderHome userClaims={userClaims} />} />
+        </Routes>
     </>)
 }
 
