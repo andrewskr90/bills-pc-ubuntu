@@ -28,18 +28,12 @@ authRouter.post('/login',
     createSession, 
     encryptSessionCookie,
     (req, res, next) => {
-    res.status(200).send({
-        message: 'Welcome, user!',
-        data: req.claims
-    })
+    res.status(200).send(req.claims)
 })
 
 //authorize cookie
-authRouter.get('/', verifySession, decodeJwt, (req, res, next) => {
-    res.status(200).json({
-        message: 'Welcome, user!',
-        data: req.decodedJwt
-    })
+authRouter.post('/', verifySession, decodeJwt, (req, res, next) => {
+    res.status(200).json(req.claims)
 })
 
 module.exports = authRouter

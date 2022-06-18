@@ -55,11 +55,11 @@ const createSession = (req, res, next) => {
          created_date,
          modified_date } = req.results
     const claims = {
-        id: user_id,
-        sub: user_name,
-        role: user_role,
-        email: user_email,
-        favorite_gen: user_favorite_gen,
+        user_id: user_id,
+        user_name: user_name,
+        user_role: user_role,
+        user_email: user_email,
+        user_favorite_gen: user_favorite_gen,
         created_date: created_date,
         modified_date: modified_date,
         iat: Date.now()
@@ -88,8 +88,7 @@ const encryptSessionCookie = (req, res, next) => {
 }
 
 const verifySession = async (req, res, next) => {
-    const verifyCookie = () => {
-        const parsedCookies = req.signedCookies
+    const parsedCookies = req.signedCookies
         if (parsedCookies.billsPcSession === undefined) {
             return next({
                 status: 401,
@@ -102,20 +101,14 @@ const verifySession = async (req, res, next) => {
                 message: 'Inauthentic cookie.'
             })
         }
-        return parsedCookies.billsPcSession
-    }
-    try {
-        req.verifiedSession = await verifyCookie()
+        req.sessionJwt = parsedCookies.billsPcSession
         next()
-    } catch (err) {
-        next(err)
-    }
 }
 
 const decodeJwt = async (req, res, next) => {
     try {
-        const decodedJwt = await jwt.verify(req.verifiedSession, process.env.JWT_SECRET)
-        req.decodedJwt = decodedJwt
+        const decodedJwt = await jwt.verify(req.sessionJwt, process.env.JWT_SECRET)
+        req.claims = decodedJwt
         next()
     } catch (err) {
         next(err)
