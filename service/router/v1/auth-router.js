@@ -1,5 +1,5 @@
 const authRouter = require('express').Router()
-const { addUserMySQL, findUsersByFilterMySQL } = require('../../../db/queries')
+const { addUserMySQL, findUsersByFilterMySQL } = require('../../../db/queries/userQueries')
 const { 
     formatUser, 
     createSession, 

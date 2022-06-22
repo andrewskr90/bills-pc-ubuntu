@@ -1,6 +1,6 @@
 import BillsPcService from '../../../api/bills-pc'
 
-const formatCardsArray = (cardsArray) => {
+const formatCardsArray = async (cardsArray) => {
     let setId
     if (cardsArray.length > 0) {
         BillsPcService.findSetByPtcgioId(cardsArray[0].set.id)
@@ -82,8 +82,11 @@ const formatSetsArray = (setsArray) => {
             setName = set.name += '2'
         }
         let secretCount = set.total - set.printedTotal
+        if (secretCount < 0) {
+            secretCount = 0
+        }
         const formattedSet = {
-            set_pokemon_tcg_io_id: set.id,
+            set_ptcgio_id: set.id,
             set_name: setName,
             set_release_date: set.releaseDate,
             set_language: 'english',

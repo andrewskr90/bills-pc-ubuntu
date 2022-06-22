@@ -1,5 +1,5 @@
 const config = {
-    DB: {
+    MYSQL: {
         host: 'localhost',
         user: 'root',
         database: 'bills_pc',
