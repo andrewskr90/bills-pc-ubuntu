@@ -3,7 +3,7 @@
     margin: 2%;
     padding: 2%;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap
 }
 
 .cardUploader .sets .set {
@@ -15,4 +15,9 @@
 .cardUploader .cards {
     display: flex;
     flex-wrap: wrap;
+}
+
+.gymLeaderHeader {
+    display: flex;
+    justify-content: space-around;
 }

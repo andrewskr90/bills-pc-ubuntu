@@ -4,7 +4,13 @@ import CardUploader from './CardUploader'
 const GymLeaderHome = () => {
     return (
         <div className='gymLeaderHome'>
-            {/* <CardUploader/> */}
+            <header className='gymLeaderHeader'>
+                <h2>Gym Leader Admin</h2>
+                <nav>
+                    <a href='/'>Trainer Site</a>
+                </nav>
+            </header>
+            <CardUploader/>
         </div>
     )
 }
