@@ -16,7 +16,12 @@ const BillsPcService = {
         return axios.get(`${baseURL}/sets/ptcgio/${id}`)
     },
     postSetsToSets(setsArray) {
-        return axios.post(`${baseURL}/sets`, setsArray)
+        return axios({
+            ...options,
+            url: 'api/v1/sets',
+            method: 'post',
+            data: setsArray
+        })
     },
     postCardsToCards(cardsArray) {
         console.log('post cards', cardsArray)
