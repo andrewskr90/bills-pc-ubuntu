@@ -3,7 +3,7 @@ const express = require('express')
 const path = require('path')
 
 const PORT = process.env.PORT || 7070
-const server = require('./service')
+const server = require('./service/service.js')
 
 server.use(express.static(path.join(__dirname, 'client/dist')))
 
