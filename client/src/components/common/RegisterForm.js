@@ -31,9 +31,9 @@ const RegisterForm = () => {
             data: formValues,
             withCredentials: true
         }
-        axios(axiosOptions).then(res => {
+        axios(axiosOptions)
+            .then(res => {
                 setErrorMessage('')
-                console.log(res.data)
                 // setResponse(res.message)
             }).catch(err => {
                 console.log(err.response)

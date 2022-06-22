@@ -65,14 +65,19 @@ const CardUploader = () => {
     const formattedSets = formatSetsArray(setsToPost)
 
     const handlePostSetsToSets = () => {
-        BillsPcService.postSetsToSets(formattedSets)
-            .then(res => console.log(res))
+        const sets = formattedSets
+        BillsPcService.postSetsToSets(sets)
+            .then(res => {
+                console.log(res)
+            })
             .catch(err => console.log(err.message))
     }
 
     const handlePostCardsToCards = () => {
         BillsPcService.postCardsToCards(formattedCurrentSetCards)
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res)
+            })
             .catch(err => {
                 console.log(err)
             })

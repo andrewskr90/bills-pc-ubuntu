@@ -1,17 +1,18 @@
-const connection = require('../../db')
-const { seperateColumnsValues, filterConcatinated } = require('../../utils/queryFormatters')
+const connection = require('..')
+const QueryFormatters = require('../../utils/QueryFormatters')
 
 //find, add, update, remove verbage
 
 const addUserMySQL = (req, res, next) => {
     const user = req.user
-    const { columns, values } = seperateColumnsValues(user)
+    const { columns, values } = QueryFormatters.seperateColumnsValues(user)
     const query = `INSERT INTO users (${columns}) VALUES (${values});`
 
     connection.query(query, (err, results) => {
-        if (err.code === 'ER_DUP_ENTRY') {
-            return next({ status: 409, message: 'Trainer name taken.'})
-        } else if (err) {
+        if (err) {
+            if (err.code === 'ER_DUP_ENTRY') {
+                return next({ status: 409, message: 'Trainer name taken.'})
+            }
             return next(err)
         }
         req.results = results
@@ -21,7 +22,7 @@ const addUserMySQL = (req, res, next) => {
 
 const findUsersByFilterMySQL = (req, res, next) => {
     const preppedFilter = req.preppedFilter
-    const queryFilter = filterConcatinated(preppedFilter)
+    const queryFilter = QueryFormatters.filterConcatinated(preppedFilter)
     const query = `SELECT * FROM users WHERE ${queryFilter};`
     connection.query(query, (err, results) => {
         if (err) {
