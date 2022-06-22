@@ -11,23 +11,23 @@ const checkRegisterValues = (req, res, next) => {
     const onlyLetters = isOnlyLetters(user_name)
     
     if (!user_name) {
-        next({ status: 400, message: 'Username required.' })
+        return next({ status: 400, message: 'Username required.' })
     } else if (!onlyLetters) {
-        next({ status: 400, message: 'Username can only have letters.'})
+        return next({ status: 400, message: 'Username can only have letters.'})
     } else if (!user_email) {
-        next({ status: 400, message: 'Email required.' })
+        return next({ status: 400, message: 'Email required.' })
     } else if (!user_favorite_gen) {
-        next({ status: 400, message: 'Favorite gen required.' })
+        return next({ status: 400, message: 'Favorite gen required.' })
     } else if (!user_password) {
-        next({ status: 400, message: 'Password required.' })
+        return next({ status: 400, message: 'Password required.' })
     } else if (!repeat_user_password) {
-        next({ status: 400, message: 'Confirm password.' })
+        return next({ status: 400, message: 'Confirm password.' })
     } else if (user_name.length < 3) {
-        next({ status: 400, message: 'Trainer name must be at least 3 letters.' })
+        return next({ status: 400, message: 'Trainer name must be at least 3 letters.' })
     } else if (user_password.length < 7) {
-        next({ status: 400, message: 'Password must be at least 7 characters long.' })
+        return next({ status: 400, message: 'Password must be at least 7 characters long.' })
     } else if (user_password !== repeat_user_password) {
-        next({ status: 400, message: 'Passwords do not match.' })
+        return next({ status: 400, message: 'Passwords do not match.' })
     } 
     next()
 }
@@ -73,7 +73,7 @@ const createSession = (req, res, next) => {
         req.sessionJwt = sessionJwt
         next()
     } catch (err) {
-        next(err)
+        return next(err)
     }
 }
 
@@ -109,18 +109,24 @@ const decodeJwt = async (req, res, next) => {
     try {
         const decodedJwt = await jwt.verify(req.sessionJwt, process.env.JWT_SECRET)
         req.claims = decodedJwt
-        next()
     } catch (err) {
-        next(err)
+        return next(err)
     }
-    
+    next()
+}
+
+const gymLeaderOnly = async (req, res, next) => {
+    if (req.claims.user_role !== 'GymLeader') {
+        return next({ message: 'Unauthorized.'})
+    }
+    next()
 }
 
 const encryptPassword = (req, res, next) => {
     const rounds = 10
     bcrypt.hash(req.user.user_password, rounds, (err, hash) => {
         if (err) {
-            next(err)
+            return next(err)
         } else {
             req.user.user_password = hash
             next()
@@ -133,9 +139,9 @@ const authenticateUser = (req, res, next) => {
     const hash = req.results.user_password
     bcrypt.compare(password, hash, (err, result) => {
         if (err) {
-            next(err)
+            return next(err)
         } else if (!result) {
-            next({ message: 'Incorrect username and password.' })
+            return next({ message: 'Incorrect username and password.' })
         } else {
             next()
         }
@@ -157,5 +163,6 @@ module.exports = {
     encryptPassword, 
     authenticateUser,
     prepUserFilter,
-    checkRegisterValues
+    checkRegisterValues,
+    gymLeaderOnly
 }
