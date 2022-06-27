@@ -12,9 +12,12 @@ const BillsPcService = {
             data: formValues,
         })
     },
-    findSetByPtcgioId(id) {
-        return axios.get(`${baseURL}/sets/ptcgio/${id}`)
-    },
+    // getSets() {
+    //     return axios({
+    //         ...options,
+    //         url: '/api/v1/sets'
+    //     })
+    // },
     postSetsToSets(setsArray) {
         return axios({
             ...options,
@@ -24,8 +27,12 @@ const BillsPcService = {
         })
     },
     postCardsToCards(cardsArray) {
-        console.log('post cards', cardsArray)
-        return axios.post(`${baseURL}/cards`, cardsArray)
+        return axios({
+            ...options,
+            url: '/api/v1/cards',
+            method: 'post',
+            data: cardsArray
+        })
     },
     authenticateSession() {
         return axios({

@@ -58,6 +58,10 @@ table {
     /* border: 1px solid black;   */
 }
 
+.app {
+  width: 100%;
+}
+
 .registration {
   display: flex;
   flex-direction: column;
@@ -77,11 +81,11 @@ form {
 
 
 h1 {
-    font-size: 10vw;
+    font-size: 4vw;
 }
 
 h2 {
-  font-size: 4vw;
+  font-size: 3vw;
 }
 
 header.nav-bar nav {

@@ -12,15 +12,7 @@ const initialFormValues = {
 const LoginForm = (props) => {
     const [formValues, setFormValues] = useState(initialFormValues)
     const [errorMessage, setErrorMessage] = useState('')
-    const { setUserClaims, isLoading, setIsLoading } = props
-    
-    // useEffect(() => {
-    //     console.log('3')
-    //     setIsLoading(true)
-    //     setTimeout(() => {
-    //         setIsLoading(false)
-    //     }, 2000)
-    // }, [])
+    const { setUserClaims } = props
 
     const navigate = useNavigate()
 
@@ -37,11 +29,9 @@ const LoginForm = (props) => {
         BillsPcService.login(formValues)
             .then(res => {
                 setErrorMessage('')
-                console.log(res)
                 setUserClaims(res.data)
                 navigate('/')
             }).catch(err => {
-                console.log('catch', err)
                 console.log(err.response)
                 setErrorMessage(err.response.data.message)
             })
