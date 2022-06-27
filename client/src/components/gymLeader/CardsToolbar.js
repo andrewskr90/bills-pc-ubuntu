@@ -1,18 +1,23 @@
 import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const CardsToolbar = (props) => {
-    const { resetCurrentSet, handlePostCardsToCards, currentSetObject } = props
+    const { handlePostCardsToCards, currentSetObject } = props
+    const {setId } = useParams()
+    const navigate = useNavigate()
 
-    return (<>
-        <div className='cardsToolbar'>
-            <h2>Current Set: {currentSetObject.name}</h2>
-            <button onClick={resetCurrentSet}>Clear Search Results</button>
-            <div className='buttonDiv'>
-                <p>POST all cards to Cards Table</p>
-                <button onClick={handlePostCardsToCards}>POST</button>
-            </div>
+    const backToSets = () => {
+        navigate('/gym-leader/card-manager/ptcgio')
+    }
+
+    return (<div className='cardsToolbar toolbar'>
+        <h2>Current Set: {setId}</h2>
+        <button onClick={backToSets}>Back to Sets</button>
+        <div className='buttonDiv'>
+            <p>POST all cards to Cards Table</p>
+            <button onClick={handlePostCardsToCards}>POST</button>
         </div>
-    </>)
+    </div>)
 }
 
 export default CardsToolbar

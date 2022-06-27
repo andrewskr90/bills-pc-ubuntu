@@ -1,15 +1,7 @@
 import BillsPcService from '../../../api/bills-pc'
+import PtcgioService from '../../../api/pokemon-tcg-io'
 
-const formatCardsArray = async (cardsArray) => {
-    let setId
-    if (cardsArray.length > 0) {
-        BillsPcService.findSetByPtcgioId(cardsArray[0].set.id)
-            .then(res => {
-                setId = res.data[0].set_id
-            })
-            .catch(err => console.log(err))
-    }
-
+const formatCardsArray = (cardsArray) => {
     let nationalDexNumbersValue
     let regulationMarkValue
     let flavorTextValue
@@ -51,7 +43,7 @@ const formatCardsArray = async (cardsArray) => {
         }
 
         const formattedCard = {
-            card_set_id: setId,
+            card_set_id: card.set.id,
             card_name: card.name,
             card_number: card.number,
             card_image_small: card.images.small,
@@ -103,4 +95,41 @@ const formatSetsArray = (setsArray) => {
     return formattedSets
 }
 
-export { formatCardsArray, formatSetsArray }
+const findPriceTypes = async (sets, bottomIndex, topIndex) => {
+    const consolidateSets = async () => {
+        const toReturn = []
+        for (let i=bottomIndex; i<=topIndex; i++) {
+            console.log(sets, sets[i])
+                const setCards = await PtcgioService.getCardsFromSet(sets[i].id)
+                toReturn.push(setCards.data.data)
+        }
+        return toReturn
+    }
+    
+    const consolidatedSets = await consolidateSets()
+    const priceObjects = consolidatedSets.map((set, idx) => {
+        const cardPrices = set.map((card, idx) => {
+            if (card.tcgplayer) {
+                return card.tcgplayer.prices
+            } else {
+                return
+            }
+        })
+        return cardPrices
+    })
+
+    const priceTypes = {}
+    for (let i=0; i<priceObjects.length; i++){
+        console.log(i, priceObjects)
+        const priceTypeKeys = Object.keys(priceObjects[0][i])
+        priceTypeKeys.forEach(type => {
+            if (!priceTypes[type]) {
+                priceTypes[type] = 1
+            }
+        })
+    }
+    console.log(priceTypes)
+    return priceTypes
+}
+
+export { formatCardsArray, formatSetsArray, findPriceTypes }
