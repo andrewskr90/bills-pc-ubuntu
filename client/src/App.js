@@ -33,20 +33,20 @@ const App = (props) => {
         checkAuth()
     }, [])
 
-    return (<>
+    return (<div className='app'>
         {initialData
         ?
         <Routes>
             <Route path='/login' element={<LoginPage setUserClaims={setUserClaims} />} />
-            <Route path='/' element={<TrainerHome userClaims={userClaims} />} />
+            <Route path='/*' element={<TrainerHome userClaims={userClaims} />} />
             {/* Gym Leader protected routes */}
             <Route element={<GymLeaderRoute userClaims={userClaims} />} >
-                <Route path='/gym-leader' element={<GymLeaderHome userClaims={userClaims} />} />
+                <Route path='/gym-leader/*' element={<GymLeaderHome userClaims={userClaims} />} />
             </Route>
         </Routes>
         :
         <h2>Loading...</h2>}
-    </>)
+    </div>)
 }
 
 export default App

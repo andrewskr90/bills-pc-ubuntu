@@ -2,11 +2,10 @@ import React from 'react'
 
 const FilterSets = (props) => {
 
-    const { initialSets, 
+    const { ptcgioSets, 
             setFilteredSets, 
             filterFormValues, 
-            setFilterFormValues,
-            setSetsToPost } = props
+            setFilterFormValues } = props
 
     const updateValuesAndFilter = (e) => {
         setFilterFormValues({
@@ -16,13 +15,13 @@ const FilterSets = (props) => {
 
         const searchFor = e.target.value.toLowerCase()
 
-        //reset filteredSets to initialSets if user clears filter field
+        //reset filteredSets to ptcgioSets if user clears filter field
         if (searchFor === '') {
-            setFilteredSets(initialSets)
+            setFilteredSets(ptcgioSets)
             return
         }
 
-        const filteredInitialSets = initialSets.filter(set => {
+        const filteredptcgioSets = ptcgioSets.filter(set => {
             const setName = set.name.toLowerCase()
             let j = 0
             let searchForSubstring = searchFor[j]
@@ -43,8 +42,7 @@ const FilterSets = (props) => {
                 }
             }
         })
-        setFilteredSets(filteredInitialSets)
-        setSetsToPost(filteredInitialSets)
+        setFilteredSets(filteredptcgioSets)
     }
 
     return (<>
