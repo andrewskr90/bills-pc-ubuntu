@@ -4,7 +4,9 @@ import { findPriceTypes } from '../../utils/format-data/pokemon-tcg-io'
 
 const SetsToolbar = (props) => {
     const [priceTypeFormValues, setPriceTypeFormValues] = useState({})
-    const { handlePostSetsToSets,
+    const { 
+        handlePostSetsToSets,
+        handlePostAllCardsToCards,
         ptcgioSets, 
         setFilteredSets, 
         filterFormValues, 
@@ -28,6 +30,10 @@ const SetsToolbar = (props) => {
         <div className='buttonDiv'>
             <p>POST all sets to Sets Table</p>
             <button onClick={handlePostSetsToSets}>POST Sets</button>
+        </div>
+        <div className='buttonDiv'>
+            <p>POST all cards to cards Table</p>
+            <button onClick={handlePostAllCardsToCards}>POST cards</button>
         </div>
         <div className='buttonDiv'>
             <p>Log card price types</p>
