@@ -9,7 +9,7 @@ const corsOptions = {
     credentials: true
 }
 server.use(cors(corsOptions))
-server.use(bodyParser.json())
+server.use(bodyParser.json({ limit: '50mb' }))
 server.use(cookieParser(process.env.COOKIE_SECRET))
 
 const rootRouter = require('./router/index')

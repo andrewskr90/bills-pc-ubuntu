@@ -13,13 +13,26 @@ const addSetsMySQL = async (req, res, next) => {
             }
             return next(err)
         } else {
-            console.log('mysqlQuery results')
             req.results = results
             next()
         }
     })
 }
 
+const getSetByPtcgioIdMySQL = async (req, res, next) => {
+    const set_ptcgio_id = req.setPtcgioId
+    const queryFilter = QueryFormatters.filterConcatinated({set_ptcgio_id})
+    const query = `SELECT * FROM sets WHERE ${queryFilter};`
+    connection.query(query, (err, results) => {
+        if (err) {
+            return next(err)
+        }
+        req.set = results[0]
+        return next()
+    })
+}
+
 module.exports = {
-    addSetsMySQL
+    addSetsMySQL,
+    getSetByPtcgioIdMySQL
 }

@@ -1,4 +1,3 @@
-import BillsPcService from '../../../api/bills-pc'
 import PtcgioService from '../../../api/pokemon-tcg-io'
 
 const formatCardsArray = (cardsArray) => {
@@ -8,7 +7,6 @@ const formatCardsArray = (cardsArray) => {
     let rulesValue
 
     const formattedCards = cardsArray.map(card => {
-
         if (card.nationalPokedexNumbers) {
             let nationalDexNumbersString = ''
             card.nationalPokedexNumbers.forEach(number => {
@@ -28,6 +26,7 @@ const formatCardsArray = (cardsArray) => {
         }
 
         if (card.flavorText) {
+
             flavorTextValue = card.flavorText
         } else {
             flavorTextValue = null
@@ -36,7 +35,7 @@ const formatCardsArray = (cardsArray) => {
         if (card.rules) {
             rulesValue = ''
             for (let i=1; i<=card.rules.length; i++) {
-                rulesValue += `${i}:${card.rules[i-1]}`
+                rulesValue += `${i}: ${card.rules[i-1]} `
             }
         } else {
             rulesValue = null
@@ -56,10 +55,8 @@ const formatCardsArray = (cardsArray) => {
             card_rules: rulesValue,
             card_artist: card.artist
         }
-
         return formattedCard
     })
-    
     return formattedCards
 }
 

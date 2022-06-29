@@ -17,7 +17,6 @@ const PtcgioManager = () => {
     const [currentSetCards, setCurrentSetCards] = useState([])
     const [filteredSets, setFilteredSets] = useState([])
     const [filterFormValues, setFilterFormValues] = useState(initialFilterFormValues)
-    const [currentSetObject, setCurrentSetObject] = useState(false)
 
     useEffect(() => {
         PtcgioService.getSets()
@@ -42,16 +41,32 @@ const PtcgioManager = () => {
             .catch(err => console.log(err.message))
     }
 
-    const handlePostCardsToCards = () => {
-        const formattedCardsArray = formatCardsArray(currentSetCards)
-        console.log(formattedCardsArray)
-        BillsPcService.postCardsToCards(ptcgioSets)
+    const postSetCardsToBPC = async (cards) => {
+        const formattedCardsArray = formatCardsArray(cards)
+        await BillsPcService.postCardsToCards(formattedCardsArray)
             .then(res => {
                 console.log(res)
             })
             .catch(err => {
                 console.log(err)
             })
+    }
+
+    const handlePostCardsToCards = async () => {
+        postSetCardsToBPC(currentSetCards)
+    }
+
+    const handlePostAllCardsToCards = async () => {
+        for (let i=0; i<ptcgioSets.length; i++) {
+            await PtcgioService.getCardsFromSet(ptcgioSets[i].id)
+                .then(res => postSetCardsToBPC(res.data.data))
+                .catch(err => console.log(err))
+            await new Promise(resolve => {
+                setTimeout(() => {
+                    resolve()
+                }, 2000)
+            })
+        }
     }
 
     return (<div className='ptcgioManager'>
@@ -63,12 +78,12 @@ const PtcgioManager = () => {
                     filterFormValues={filterFormValues}
                     setFilterFormValues={setFilterFormValues}
                     handlePostSetsToSets={handlePostSetsToSets}
+                    handlePostAllCardsToCards={handlePostAllCardsToCards}
                 />
             } />
             <Route path='/:setId' element={
                 <CardsToolbar 
                     handlePostCardsToCards={handlePostCardsToCards} 
-                    currentSetObject={currentSetObject} 
                 />
             } />
         </Routes>
