@@ -14,7 +14,7 @@ const QueryFormatters = {
             }
         })
         query += `${columns} VALUES `
-
+        //all values enclosed in double quotes, individual value in single
         let valuesString = ""
         objectsArray.forEach((obj, i) => {
             let values = "("
@@ -25,7 +25,11 @@ const QueryFormatters = {
                 } else if (obj[key] === undefined) {
                     value = null
                 }else if (typeof obj[key] === 'string') {
-                    value = `"${obj[key]}"`
+                    //remove accents
+                    let accentsRemoved = obj[key].normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                    //escape apostrophes
+                    let escapedApostrophe = accentsRemoved.replace(/'/g, "''")
+                    value = `'${escapedApostrophe}'`
                 } else if (typeof obj[key] === 'number') {
                     value = obj[key]
                 }          
