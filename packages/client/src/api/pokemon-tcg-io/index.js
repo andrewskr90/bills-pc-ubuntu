@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { PTCGIO_API } from '../../../../config'
+import { PTCGIO_API } from '../../../../../config'
 
 const { baseURL } = PTCGIO_API
 

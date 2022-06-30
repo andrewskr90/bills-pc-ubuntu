@@ -1,6 +1,6 @@
 const cardRouter = require('express').Router()
 const { verifySession, decodeJwt, gymLeaderOnly } = require('../../middleware/auth-middleware')
-const { addCardsMySQL } = require('../../../db/queries/cardQueries')
+const { addCardsMySQL } = require('../../db/queries/cardQueries')
 const { findCardSetId, alterCardSetIds } = require('../../middleware/card-middleware')
 
 cardRouter.post('/',
