@@ -1,4 +1,4 @@
-const { getSetByPtcgioIdMySQL } = require('../../db/queries/setQueries')
+const { getSetByPtcgioIdMySQL } = require('../db/queries/setQueries')
 
 const findCardSetId = async (req, res, next) => {
     req.setPtcgioId = req.body[0].card_set_id 
