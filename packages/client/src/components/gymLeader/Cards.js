@@ -19,7 +19,7 @@ const Cards = (props) => {
             })
     }, [])
     
-    return (<div className='cards'>
+    return (<div className='panel cards'>
         {currentSetCards.length === 0
         ?
         <h2>Loading...</h2>

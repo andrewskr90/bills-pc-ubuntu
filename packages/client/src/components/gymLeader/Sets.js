@@ -6,7 +6,7 @@ const Sets = (props) => {
 
     const navigate = useNavigate()
 
-    return (<div className='sets'>
+    return (<div className='panel sets'>
         {filteredSets.length === 0
         ?
         <h2>Loading...</h2>

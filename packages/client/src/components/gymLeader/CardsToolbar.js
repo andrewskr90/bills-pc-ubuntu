@@ -10,7 +10,7 @@ const CardsToolbar = (props) => {
         navigate('/gym-leader/card-manager/ptcgio')
     }
 
-    return (<div className='cardsToolbar toolbar'>
+    return (<div className='cardsSidebar sidebar'>
         <h2>Current Set: {setId}</h2>
         <button onClick={backToSets}>Back to Sets</button>
         <div className='buttonDiv'>

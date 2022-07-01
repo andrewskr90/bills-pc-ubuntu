@@ -45,7 +45,7 @@ const CardInfo = (props) => {
                 {card.tcgplayer
                 ? Object.keys(card.tcgplayer.prices).map(rarity => {
                     return <div key={`${card.id}-${rarity}`} className='cardRarity'>
-                        <h2>{rarity} prices</h2>
+                        <h3>{rarity} prices</h3>
                         <div className='priceTypes'>
                             {Object.keys(card.tcgplayer.prices[rarity]).map(priceType => {
                                 return <div className='priceType'>

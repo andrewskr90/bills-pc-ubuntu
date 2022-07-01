@@ -87,8 +87,7 @@ const PtcgioManager = () => {
                 />
             } />
         </Routes>
-        <div className='panel'>
-            <Routes>
+        <Routes>
                 <Route path='/' element={<Sets filteredSets={filteredSets} setCurrentSetCards={setCurrentSetCards} />} />
                 <Route path='/:setId/*' element={
                     <Cards 
@@ -97,7 +96,6 @@ const PtcgioManager = () => {
                     />
                 } />
             </Routes>
-        </div>
     </div>)
 }
 

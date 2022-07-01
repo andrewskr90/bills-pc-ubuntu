@@ -10,11 +10,9 @@ const CardManager = () => {
             <Link to='ptcgio' className='link'>PTCGIO</Link>
             <Link to='bills-pc' className='link'>Bills PC</Link>
         </div>
-        <div className='panel'>
-            <Routes>
-                <Route path='/ptcgio/*' element={<PtcgioManager />} />
-            </Routes>
-        </div>
+        <Routes>
+            <Route path='/ptcgio/*' element={<PtcgioManager />} />
+        </Routes>
     </div>)
 }
 

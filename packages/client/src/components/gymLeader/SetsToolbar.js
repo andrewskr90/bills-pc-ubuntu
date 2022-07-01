@@ -26,7 +26,7 @@ const SetsToolbar = (props) => {
         findPriceTypes(ptcgioSets, bottomIndex, topIndex)
     }
 
-    return (<div className='setsToolbar toolbar'>
+    return (<div className='setsSidebar sidebar'>
         <div className='buttonDiv'>
             <p>POST all sets to Sets Table</p>
             <button onClick={handlePostSetsToSets}>POST Sets</button>
