@@ -3,7 +3,9 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0 2%;
-    margin: 0.5% 0;
+    margin: 0.5% 0.5%;
+    background-color: #30638e;
+    border-radius: 15px;
 }
 
 .link {
@@ -12,23 +14,9 @@ header {
     /* padding: 0 2%; */
 }
 
-.panel .sets {
-    margin: 2%;
-    padding: 2%;
+.ptcgioManager {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.panel .sets .set {
-    padding: 3%;
-    width:15%;
-}
-
-.panel .cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    height: 80vh;
 }
 
 .toolbar {
@@ -36,22 +24,65 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0 2%;
-    margin: 0.5% 0;
+    margin: 0.5%;
+    border-radius: 15px;
+    background-color: #30638e;
 }
 
-.card {
+.sidebar {
     width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2%;
+    margin: 0.5%;
+    border-radius: 15px;
+    background-color: #30638e;
+}
+
+.panel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0.5%;
     padding: 2%;
+    overflow: auto;
+    width: 85%;
+    background-color: #30638e;
+    border-radius: 15px;;
+    border: solid black 4px;
 }
 
 .cardInfo {
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0.5%;
+    padding: 2%;
+    overflow: auto;
+    background-color: #30638e;
+    border-radius: 15px;;
+    border: solid black 4px;
+}
+
+.panel.sets .set {
+    padding: 3%;
+    width:15%;
+}
+
+.panel.cards .card {
+    width: 15%;
+    padding: 2%;
 }
 
 .cardInfo img {
-    width: 40%;
+    width: 40vh;
+}
+
+.cardInfo .cardRarities {
+    display: flex;
+    justify-content: space-between;
 }
 
 .cardStats {

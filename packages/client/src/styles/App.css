@@ -58,11 +58,11 @@ table {
 
 body {
   background-color: #d1495b;
+  height: 100%;
 }
 
 .app {
   color: #edae49;
-  background-color: #30638e;
   width: 100%;
 }
 
