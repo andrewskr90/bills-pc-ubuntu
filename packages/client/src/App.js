@@ -20,24 +20,21 @@ const App = (props) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const checkAuth = async () => {
-            await BillsPcService.authenticateSession()
-                .then(res =>  {
-                    initialData = true
-                    setUserClaims(res.data)
-                }).catch(err => {
-                    initialData = true
-                    navigate('/login')
-                })
-        }
-        checkAuth()
+        BillsPcService.authenticateSession()
+            .then(res =>  {
+                initialData = true
+                setUserClaims(res.data)
+            }).catch(err => {
+                initialData = true
+                navigate('/login')
+            })
     }, [])
 
     return (<div className='app'>
         {initialData
         ?
         <Routes>
-            <Route path='/login' element={<LoginPage setUserClaims={setUserClaims} />} />
+            <Route path='/login' element={<LoginPage userClaims={userClaims} setUserClaims={setUserClaims} />} />
             <Route path='/*' element={<TrainerHome userClaims={userClaims} />} />
             {/* Gym Leader protected routes */}
             <Route element={<GymLeaderRoute userClaims={userClaims} />} >
