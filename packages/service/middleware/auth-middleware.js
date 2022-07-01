@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt-nodejs')
 
 const isOnlyLetters = (string) => {
     return /^[a-zA-Z]+$/.test(string)
