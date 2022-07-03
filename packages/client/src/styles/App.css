@@ -48,46 +48,61 @@ table {
 }
 
 /* end of CSS reset */
+/* #d1495b red
+#edae49 yellow
+#30638e blue */
 
 * {
     box-sizing:border-box;
     padding:0;
-    margin:0;
     max-width:100%;
 }
 
-body {
-  background-color: #d1495b;
+p {
+  font-size: 50px;
 }
-
-.app {
-  color: #edae49;
-}
-
-.registration {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.error {
-  color: red;
-}
-
 
 h1 {
-    font-size: 4vw;
+  font-size: 85px;
 }
 
 h2 {
-  font-size: 3vw;
+  font-size: 70px;
+}
+
+body {
+  background-color: #FBFAF5;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  background-color: #30638e;
+  padding: 2vh;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 16px;
+  /* padding: 0 2%; */
+}
+
+.app {
+  background-color: #FBFAF5;
+  min-height: 100vh;
+}
+
+.trainerHome {
+
+}
+
+header.navBar {
+  height: 7vh;
+  background-color: #30638e;
+  padding: 0 5% 0 2%;
+  display: flex;
+  align-items: center;
 }
 
 header.nav-bar nav {
@@ -100,16 +115,83 @@ a {
     font-size: 3vw;
 }
 
-header.nav-bar {
-    height: 10vw;
-    width: 100%;
-    margin: 0.5%;
-    background-color: #30638e;
-    padding: 0 5% 0 2%;
-    display: flex;
-    align-items: center;
-    /* justify-content: space-around; */
-    /* justify-content: space-around; */
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0.5%;
+  padding: 2%;
+  overflow: auto;
+  width: 85%;
+  background-color: #30638e;
+  border-radius: 15px;;
+  border: solid black 4px;
+}
+
+.loginPage {
+  height: 100vh;
+}
+
+.loginForm {
+  margin: 2vh 0;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.registerForm {
+  margin: 2vh 0;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100vw;
+  /* border: black solid 2px; */
+  height: 100%
+}
+
+.formInputs {
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  /* border: solid black 2px; */
+  height: 100%;
+}
+
+input {
+  font-size: 50px;
+}
+
+select {
+  font-size: 50px;
+  width: 100%;
+}
+
+option {
+  font-size: 10px;
+}
+
+button {
+  font-size: 50px;
+  border: none;
+  width: 20vw;
+  height: 150px;
+}
+
+.error {
+  color: red;
 }
 
 .my-collection .container {

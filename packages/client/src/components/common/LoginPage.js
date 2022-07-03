@@ -6,7 +6,9 @@ const LoginPage = (props) => {
     const { setUserClaims } = props
 
     return (<div className='loginPage'>
-        <h1>Bill's PC</h1>
+        <header>
+            <h1>Kyle's PC</h1>
+        </header>
         <LoginForm setUserClaims={setUserClaims} />
         <RegisterForm />
     </div>)

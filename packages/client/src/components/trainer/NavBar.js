@@ -9,7 +9,7 @@ const NavBar = (props) => {
   }
 
     return (
-      <header className='nav-bar'>
+      <header className='navBar'>
         <h1
           onClick={clickBillsPC}
         >
