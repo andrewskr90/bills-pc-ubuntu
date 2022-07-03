@@ -85,7 +85,6 @@ header {
 .link {
   text-decoration: none;
   font-size: 16px;
-  /* padding: 0 2%; */
 }
 
 .app {
@@ -93,11 +92,37 @@ header {
   min-height: 100vh;
 }
 
-.trainerHome {
+.trainerApp {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+}
+
+/* place styles in either collection or emptyCollection */
+.trainerHome {
+  height: 100%;
+}
+
+.collection {
+  height: 100%;
+}
+
+.emptyCollection {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.emptyCollection .link {
+  width: 100%;
+  margin: 10%;
+}
+
+.emptyCollection .link button {
+  width: 40%;
 }
 
 .navBar {
@@ -116,6 +141,8 @@ header {
 .link {
   width: 25%;
   text-decoration: none;
+  display: flex;
+  justify-content: center;
 }
 
 a {
@@ -193,7 +220,7 @@ option {
 button {
   font-size: 50px;
   border: none;
-  width: 20vw;
+  width: 20%;
   height: 150px;
 }
 

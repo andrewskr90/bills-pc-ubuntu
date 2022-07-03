@@ -11,9 +11,9 @@ const TrainerApp = (props) => {
 
     }, [])
 
-    return (<div className='trainerHome'>
+    return (<div className='trainerApp'>
         <Routes>
-            <Route path='/' element={<TrainerHome userClaims={userClaims} />} />
+            <Route path='/' element={<TrainerHome collectedItems={collectedItems} />} />
             <Route path='/add' element={<p>add items to collection</p>} />
             <Route path='/rip' element={<p>rip products from collection</p>} />
             <Route path='/profile' element={<p>user profile</p>} />
