@@ -87,6 +87,26 @@ header {
   font-size: 16px;
 }
 
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexColumnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexColumnSpaceCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .app {
   background-color: #FBFAF5;
   min-height: 100vh;
@@ -99,21 +119,21 @@ header {
   height: 100vh;
 }
 
+.page {
+  height: 100%;
+}
+
 /* place styles in either collection or emptyCollection */
 .trainerHome {
-  height: 100%;
+
 }
 
 .collection {
-  height: 100%;
 }
 
+
 .emptyCollection {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
 }
 
 .emptyCollection .link {
@@ -178,10 +198,6 @@ a {
 .registerForm {
   margin: 2vh 0;
   height: 30vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
 }
 
@@ -196,11 +212,6 @@ form {
 
 .formInputs {
   width: 60vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  /* border: solid black 2px; */
   height: 100%;
 }
 

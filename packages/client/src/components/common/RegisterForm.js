@@ -43,7 +43,7 @@ const RegisterForm = () => {
 
     return (<div className='registerForm'>
         <form onSubmit={submitForm}>
-            <div className='formInputs'>
+            <div className='formInputs flexColumnSpaceCenter'>
                 <h2>Register</h2>
                 <input
                     name='user_name'
