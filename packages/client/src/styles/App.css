@@ -48,7 +48,7 @@ table {
 }
 
 /* end of CSS reset */
-/* #d1495b red
+/* #D1495B red
 #edae49 yellow
 #30638e blue */
 
@@ -94,21 +94,28 @@ header {
 }
 
 .trainerHome {
-
-}
-
-header.navBar {
-  height: 7vh;
-  background-color: #30638e;
-  padding: 0 5% 0 2%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }
 
-header.nav-bar nav {
+.navBar {
+  height: 7vh;
+  background-color: #D1495B;
+  display: flex;
+}
+
+.navBar .link button {
+  width: 100%;
+  background-color: transparent;
+  border: solid #FBFAF5 1px;
+  color: #FBFAF5;
+}
+
+.link {
   width: 25%;
-  display:flex;
-  justify-content: space-evenly;
+  text-decoration: none;
 }
 
 a {

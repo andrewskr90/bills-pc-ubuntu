@@ -1,9 +1,8 @@
 import React from 'react'
-import NavBar from './NavBar'
 
 const TrainerHome = () => {
     return (<div className='trainerHome'>
-        <NavBar />
+        <p>trainer home</p>
     </div>)
 }
 

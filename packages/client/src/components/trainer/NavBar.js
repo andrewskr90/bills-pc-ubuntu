@@ -1,25 +1,14 @@
 import React from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const NavBar = (props) => {
-  const { user } = props;
-  const navigate = useNavigate();
-  const clickBillsPC = () => {
-    naviate('/my-collection')
-  }
+const NavBar = () => {
 
-    return (
-      <header className='navBar'>
-        <h1
-          onClick={clickBillsPC}
-        >
-          Bill's PC
-        </h1>
-        <nav>
-          
-        </nav>
-      </header>
-    )
+    return (<div className='navBar'>
+        <Link className='link' to='/'><button>Home</button></Link>
+        <Link className='link' to='/add'><button>+</button></Link>
+        <Link className='link' to='rip'><button>Rip</button></Link>
+        <Link className='link' to='profile'><button>Profile</button></Link>
+    </div>)
 }
 
 export default NavBar;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
 import LoginPage from './components/common/LoginPage'
-import TrainerHome from './components/trainer/TrainerHome'
+import TrainerApp from './components/trainer/TrainerApp'
 import GymLeaderHome from './components/gymLeader/GymLeaderHome'
 import GymLeaderRoute from './utils/auth/GymLeaderRoute'
 
@@ -37,7 +37,7 @@ const App = (props) => {
         ?
         <Routes>
             <Route path='/login' element={<LoginPage setUserClaims={setUserClaims} />} />
-            <Route path='/*' element={<TrainerHome userClaims={userClaims} />} />
+            <Route path='/*' element={<TrainerApp userClaims={userClaims} />} />
             {/* Gym Leader protected routes */}
             <Route element={<GymLeaderRoute userClaims={userClaims} />} >
                 <Route path='/gym-leader/*' element={<GymLeaderHome userClaims={userClaims} />} />
