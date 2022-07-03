@@ -37,23 +37,25 @@ const LoginForm = (props) => {
             })
     }
 
-    return (<div className='registration'>
-        <h2>Login</h2>
+    return (<div className='loginForm'>
         <form onSubmit={submitForm}>
-            <label>Trainer Name</label>
-            <input
-                name='user_name'
-                type='string'
-                value={formValues.user_name}
-                onChange={handleChange}
-            />
-            <label>Password</label>
-            <input
-                name='user_password'
-                type='password'
-                value={formValues.user_password}
-                onChange={handleChange}
-            />
+            <div className='formInputs'>
+                <h2>Login</h2>
+                <input
+                    name='user_name'
+                    type='string'
+                    placeholder='Trainer Name'
+                    value={formValues.user_name}
+                    onChange={handleChange}
+                />
+                <input
+                    name='user_password'
+                    type='password'
+                    placeholder='Password'
+                    value={formValues.user_password}
+                    onChange={handleChange}
+                />
+            </div>
             <button>Submit</button>
         </form>
         <p className='error'>{errorMessage}</p>
