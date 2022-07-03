@@ -7,7 +7,7 @@
   "author": "andrewskr90 <andrewskr90@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "lerna run start",
+    "start": "lerna run start --stream",
     "build": "lerna run build",
     "test": "lerna run test",
     "new-version": "lerna version --conventional-commits --yes",
