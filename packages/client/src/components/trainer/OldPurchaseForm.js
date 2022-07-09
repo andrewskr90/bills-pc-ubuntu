@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { purchases } from '../data/scratch_data/purchases';
-import { productCatalogue as catalogue, productCatalogue } from '../data/scratch_data/productCatalogue';
-import { sellers } from '../data/scratch_data/sellers';
+import { purchases } from '../../data/scratch_data';
+import { productCatalogue as catalogue, productCatalogue } from '../../data/scratch-data'
+import { sellers } from '../../data/scratch_data';
 
 const initialFormValues = {   
     type: '',
@@ -13,7 +13,7 @@ const initialFormValues = {
 
 const initialPurchaseCounter = purchases.length
 
-const PurchaseForm = () => {
+const OldPurchaseForm = () => {
     const [formValues, setFormValues] = useState(initialFormValues)
     const [purchaseCounter, setPurchaseCounter] = useState(initialPurchaseCounter)
     const [purchases, setPurchases] = useState([])
@@ -170,4 +170,4 @@ const PurchaseForm = () => {
     )
 }
 
-export default PurchaseForm
+export default OldPurchaseForm
