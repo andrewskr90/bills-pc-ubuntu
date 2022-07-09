@@ -42,7 +42,7 @@ const RegisterForm = () => {
     }
 
     return (<div className='registerForm'>
-        <form onSubmit={submitForm}>
+        <form className='flexCenterCenter' onSubmit={submitForm}>
             <div className='formInputs flexColumnSpaceCenter'>
                 <h2>Register</h2>
                 <input
@@ -92,7 +92,7 @@ const RegisterForm = () => {
                     onChange={handleChange}
                 />
             </div>
-            <button>Submit</button>
+            <button className='button'>Submit</button>
         </form>
         <p className='error'>{errorMessage}</p>
     </div>)
