@@ -14,11 +14,25 @@ const addCardsMySQL = async (req, res, next) => {
             return next(err)
         } else {
             req.results = results
-            next()
+            return next()
+        }
+    })
+}
+
+const getCardsBySetIdMySQL = async (req, res, next) => {
+    const setId = req.params.setId
+    const query = `SELECT * FROM cards WHERE card_set_id = '${setId}'`
+    connection.query(query, (err, results) => {
+        if (err) {
+            return next(err)
+        } else {
+            req.results = results
+            return next()
         }
     })
 }
 
 module.exports = {
-    addCardsMySQL
+    addCardsMySQL,
+    getCardsBySetIdMySQL
 }

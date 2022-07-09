@@ -38,8 +38,8 @@ const LoginForm = (props) => {
     }
 
     return (<div className='loginForm'>
-        <form onSubmit={submitForm}>
-            <div className='formInputs'>
+        <form className='flexSpaceCenter' onSubmit={submitForm}>
+            <div className='formInputs flexColumnSpaceCenter'>
                 <h2>Login</h2>
                 <input
                     name='user_name'
@@ -56,7 +56,7 @@ const LoginForm = (props) => {
                     onChange={handleChange}
                 />
             </div>
-            <button>Submit</button>
+            <button className='button'>Submit</button>
         </form>
         <p className='error'>{errorMessage}</p>
     </div>)

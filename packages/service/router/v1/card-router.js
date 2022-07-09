@@ -1,7 +1,16 @@
 const cardRouter = require('express').Router()
 const { verifySession, decodeJwt, gymLeaderOnly } = require('../../middleware/auth-middleware')
-const { addCardsMySQL } = require('../../db/queries/cardQueries')
+const { addCardsMySQL, getCardsBySetIdMySQL } = require('../../db/queries/cardQueries')
 const { findCardSetId, alterCardSetIds } = require('../../middleware/card-middleware')
+
+cardRouter.get('/set-id/:setId', 
+    verifySession,
+    decodeJwt,
+    getCardsBySetIdMySQL,
+    (req, res, next) => {
+        const results = req.results
+        res.status(200).json(results)
+})
 
 cardRouter.post('/',
     verifySession, 

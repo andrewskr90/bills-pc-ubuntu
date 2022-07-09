@@ -73,7 +73,6 @@ const QueryFormatters = {
     filterConcatinated(filter) {
         let filterStringified = ''
         const keys = Object.keys(filter)
-    
         keys.forEach((key, index) => {
             if (index === keys.length -1) {
                 filterStringified += `${key}='${filter[key]}'`

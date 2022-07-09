@@ -1,25 +1,40 @@
-import React from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
-const NavBar = (props) => {
-  const { user } = props;
-  const navigate = useNavigate();
-  const clickBillsPC = () => {
-    naviate('/my-collection')
-  }
+const NavBar = () => {
+    const [selected, setSelected] = useState()
+    const location = useLocation()
 
-    return (
-      <header className='navBar'>
-        <h1
-          onClick={clickBillsPC}
+    useEffect(() => {
+        if (location.pathname.includes('/add-items')) {
+            setSelected('add-items')
+        } else if (location.pathname.includes('profile')) {
+            setSelected('profile')
+        } else {
+            setSelected('collection')
+        }
+    }, [location])
+
+    return (<div className='navBar'>
+        <Link 
+            to='/' 
+            className={`link ${selected === 'collection' ? 'selected': ''}`}
         >
-          Bill's PC
-        </h1>
-        <nav>
-          
-        </nav>
-      </header>
-    )
+            Collection
+        </Link>
+        <Link 
+            to='/add-items' 
+            className={`link ${selected === 'add-items' ? 'selected': ''}`}
+        >
+            Add
+        </Link>
+        <Link 
+            to='/profile' 
+            className={`link ${selected === 'profile' ? 'selected': ''}`}
+        >
+            Profile
+        </Link>
+    </div>)
 }
 
 export default NavBar;
