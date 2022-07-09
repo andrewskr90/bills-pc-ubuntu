@@ -12,18 +12,31 @@ const BillsPcService = {
             data: formValues,
         })
     },
-    // getSets() {
-    //     return axios({
-    //         ...options,
-    //         url: '/api/v1/sets'
-    //     })
-    // },
+    getSets() {
+        return axios({
+            ...options,
+            url: `/api/v1/sets`
+        })
+    },
     postSetsToSets(setsArray) {
         return axios({
             ...options,
             url: 'api/v1/sets',
             method: 'post',
             data: setsArray
+        })
+    },
+    getCardsBy(filter) {
+        return axios({
+            ...options,
+            url: `/api/v1/cards`,
+            params: filter
+        })
+    },
+    getCardsBySetId(setId) {
+        return axios({
+            ...options,
+            url: `/api/v1/cards/set-id/${setId}`
         })
     },
     postCardsToCards(cardsArray) {
