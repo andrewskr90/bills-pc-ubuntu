@@ -1,13 +1,39 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 const NavBar = () => {
+    const [selected, setSelected] = useState()
+    const location = useLocation()
+
+    useEffect(() => {
+        if (location.pathname.includes('/add-items')) {
+            setSelected('add-items')
+        } else if (location.pathname.includes('profile')) {
+            setSelected('profile')
+        } else {
+            setSelected('collection')
+        }
+    }, [location])
 
     return (<div className='navBar'>
-        <Link className='link' to='/'><button>Home</button></Link>
-        <Link className='link' to='/collect'><button>+</button></Link>
-        <Link className='link' to='rip'><button>Rip</button></Link>
-        <Link className='link' to='profile'><button>Profile</button></Link>
+        <Link 
+            to='/' 
+            className={`link ${selected === 'collection' ? 'selected': ''}`}
+        >
+            Collection
+        </Link>
+        <Link 
+            to='/add-items' 
+            className={`link ${selected === 'add-items' ? 'selected': ''}`}
+        >
+            Add
+        </Link>
+        <Link 
+            to='/profile' 
+            className={`link ${selected === 'profile' ? 'selected': ''}`}
+        >
+            Profile
+        </Link>
     </div>)
 }
 

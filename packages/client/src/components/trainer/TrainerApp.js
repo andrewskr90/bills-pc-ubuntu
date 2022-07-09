@@ -1,25 +1,36 @@
 import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import NavBar from './NavBar'
-import TrainerHome from './TrainerHome'
-import CollectPage from './CollectPage'
+import TrainerCollection from './TrainerCollection'
+import AddItemsPage from './AddItemsPage'
+import TrainerProfilePage from './TrainerProfilePage'
 
 const TrainerApp = (props) => {
     const { userClaims } = props
     const [collectedItems, setCollectedItems] = useState([])
-
-    useEffect(() => {
-
-    }, [])
+    const [cardData, setCardData] = useState([])
 
     return (<div className='trainerApp'>
+        <header>
+            <h1>Kyle's PC</h1>
+        </header>
         <Routes>
-            <Route path='/' element={<TrainerHome collectedItems={collectedItems} />} />
-            <Route path='/collect' element={<CollectPage setCollectedItems={setCollectedItems} />} />
-            <Route path='/rip' element={<p>rip products from collection</p>} />
-            <Route path='/profile' element={<p>user profile</p>} />
+            <Route path='/' element={<TrainerCollection collectedItems={collectedItems} />} />
+            <Route 
+                path='/add-items/*' 
+                element={<AddItemsPage 
+                    setCollectedItems={setCollectedItems} 
+                    cardData={cardData}
+                    setCardData={setCardData}
+                />} 
+            />
+            <Route 
+                path='/profile' 
+                element={<TrainerProfilePage 
+                    userClaims={userClaims} 
+                />} 
+            />
         </Routes>
-        
         <NavBar />
     </div>)
 }
