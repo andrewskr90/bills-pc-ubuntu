@@ -6,7 +6,7 @@ import TrainerApp from './components/trainer/TrainerApp'
 import GymLeaderHome from './components/gymLeader/GymLeaderHome'
 import GymLeaderRoute from './utils/auth/GymLeaderRoute'
 
-import './styles/App.css'
+import './styles/App.less'
 import BillsPcService from './api/bills-pc'
 
 //calling api before app renders can lead to bugs
