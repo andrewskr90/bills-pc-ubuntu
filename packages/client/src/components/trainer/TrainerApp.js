@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import NavBar from './NavBar'
 import TrainerCollection from './TrainerCollection'
-import AddItemsPage from './AddItemsPage'
+import AddToCollection from './AddToCollection'
 import TrainerProfilePage from './TrainerProfilePage'
 
 const TrainerApp = (props) => {
@@ -17,8 +17,8 @@ const TrainerApp = (props) => {
         <Routes>
             <Route path='/' element={<TrainerCollection collectedItems={collectedItems} />} />
             <Route 
-                path='/add-items/*' 
-                element={<AddItemsPage 
+                path='/add/*' 
+                element={<AddToCollection 
                     setCollectedItems={setCollectedItems} 
                     cardData={cardData}
                     setCardData={setCardData}

@@ -12,7 +12,7 @@ const TrainerCollection = (props) => {
         :
         <div className='emptyCollection page flexColumnCenter'>
             <p>No items in your collection!</p>
-            <Link className='button' to='/add-items'>Add Items</Link>
+            <Link className='button' to='/add'>Add To Collection</Link>
         </div>
         }
     </div>)
