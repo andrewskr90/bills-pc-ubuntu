@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
-import LoginPage from './components/common/LoginPage'
-import TrainerApp from './components/trainer/TrainerApp'
-import GymLeaderHome from './components/gymLeader/GymLeaderHome'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import GymLeaderHome from './pages/GymLeaderHome'
 import GymLeaderRoute from './utils/auth/GymLeaderRoute'
 
-import './styles/App.less'
 import BillsPcService from './api/bills-pc'
+import './styles/App.less'
 
 //calling api before app renders can lead to bugs
 //render app first, call data in useEffect,
 //then set initialData to true
 let initialData = false
 
-const App = (props) => {
+const App = () => {
     const [userClaims, setUserClaims] = useState('')
     const navigate = useNavigate()
 
@@ -32,20 +32,22 @@ const App = (props) => {
         checkAuth()
     }, [])
 
-    return (<div className='app'>
+    return (<>
         {initialData
         ?
-        <Routes>
-            <Route path='/login' element={<LoginPage setUserClaims={setUserClaims} />} />
-            <Route path='/*' element={<TrainerApp userClaims={userClaims} />} />
-            {/* Gym Leader protected routes */}
-            <Route element={<GymLeaderRoute userClaims={userClaims} />} >
-                <Route path='/gym-leader/*' element={<GymLeaderHome userClaims={userClaims} />} />
-            </Route>
-        </Routes>
+        <div className='app'>
+            <Routes>
+                <Route path='/*' element={<Home userClaims={userClaims} />} />
+                <Route path='/login' element={<Login setUserClaims={setUserClaims} />} />
+                {/* Gym Leader protected routes */}
+                <Route element={<GymLeaderRoute userClaims={userClaims} />} >
+                    <Route path='/gym-leader/*' element={<GymLeaderHome userClaims={userClaims} />} />
+                </Route>
+            </Routes>
+        </div>
         :
         <h2>Loading...</h2>}
-    </div>)
+    </>)
 }
 
 export default App

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const TrainerProfilePage = (props) => {
+const Profile = (props) => {
     const { userClaims } = props
     const { user_name, user_email, user_favorite_gen } = userClaims
-    return (<div className='trainerProfilePage page flexColumn'>
+    return (<div className='profile'>
         <h2>Profile</h2>
         <p>Trainer: {user_name}</p>
         <p>Email: {user_email}</p>
@@ -11,4 +11,4 @@ const TrainerProfilePage = (props) => {
     </div>)
 }
 
-export default TrainerProfilePage
+export default Profile

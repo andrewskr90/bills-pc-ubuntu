@@ -6,8 +6,8 @@ const NavBar = () => {
     const location = useLocation()
 
     useEffect(() => {
-        if (location.pathname.includes('/add-items')) {
-            setSelected('add-items')
+        if (location.pathname.includes('/import')) {
+            setSelected('import')
         } else if (location.pathname.includes('profile')) {
             setSelected('profile')
         } else {
@@ -23,10 +23,10 @@ const NavBar = () => {
             Collection
         </Link>
         <Link 
-            to='/add-items' 
-            className={`link ${selected === 'add-items' ? 'selected': ''}`}
+            to='/import' 
+            className={`link ${selected === 'import' ? 'selected': ''}`}
         >
-            Add
+            Import
         </Link>
         <Link 
             to='/profile' 

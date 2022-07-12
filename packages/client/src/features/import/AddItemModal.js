@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import BillsPcService from '../../../api/bills-pc'
+import BillsPcService from '../../api/bills-pc'
 import SelectCard from './SelectCard'
 import SelectionDetails from './SelectionDetails'
 

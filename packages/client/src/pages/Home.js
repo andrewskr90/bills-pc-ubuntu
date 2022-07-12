@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import NavBar from './NavBar'
-import TrainerCollection from './TrainerCollection'
-import AddItemsPage from './AddItemsPage'
-import TrainerProfilePage from './TrainerProfilePage'
+import NavBar from '../layouts/NavBar'
+import Collection from '../features/collection'
+import Import from '../features/import'
+import Profile from '../features/profile'
 
-const TrainerApp = (props) => {
+const Home = (props) => {
     const { userClaims } = props
     const [collectedItems, setCollectedItems] = useState([])
     const [cardData, setCardData] = useState([])
-
-    return (<div className='trainerApp'>
+    
+    return (<div className='home'>
         <header>
             <h1>Kyle's PC</h1>
         </header>
         <Routes>
-            <Route path='/' element={<TrainerCollection collectedItems={collectedItems} />} />
+            <Route path='/' element={<Collection collectedItems={collectedItems} />} />
             <Route 
-                path='/add-items/*' 
-                element={<AddItemsPage 
+                path='/import/*' 
+                element={<Import 
                     setCollectedItems={setCollectedItems} 
                     cardData={cardData}
                     setCardData={setCardData}
@@ -26,7 +26,7 @@ const TrainerApp = (props) => {
             />
             <Route 
                 path='/profile' 
-                element={<TrainerProfilePage 
+                element={<Profile 
                     userClaims={userClaims} 
                 />} 
             />
@@ -35,4 +35,4 @@ const TrainerApp = (props) => {
     </div>)
 }
 
-export default TrainerApp
+export default Home

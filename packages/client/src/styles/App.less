@@ -170,11 +170,12 @@ header {
   min-height: 100vh;
 }
 
-.trainerApp {
+.home {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  border: solid black 4px
 }
 
 .page {
@@ -363,24 +364,27 @@ button:hover {
 
 /* ***Component Styles*** */
 
-/* PurchaseItems */
+/* ImportPurchase */
 
-  div.purchaseItems {
+  div.importPurchase {
     .page();
     .flexColumnNullCenter();
     div.itemList {
-      div.item {
+      width: 90%;
+      button {
+        height: 60%;
+        width: 13%;
+        padding: 0;
+        margin: 0,
+      }
+      div {
         .flexSpaceCenter();
         height: 10vh;
-        border: solid black 2px;
-        padding: 0 10%;
+        border-bottom: solid black 2px;
+        // padding: 0 10%;
         img {
           height: 90%;
-        }
-        button {
-          height: 10vw;
-          width: 10vw;
-          padding: 2vw;
+          margin: 0;
         }
       }
     }
@@ -462,4 +466,9 @@ button:hover {
         }
       }
     }
+  }
+
+/* Profile */
+  div.profile {
+    .page();
   }
