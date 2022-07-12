@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
-import CardManager from './CardManager'
-import '../../styles/GymLeader.less'
+import CardManager from '../pages/GymLeaderHome.js'
+import '../styles/GymLeader.less'
 
 const GymLeaderHome = () => {
 

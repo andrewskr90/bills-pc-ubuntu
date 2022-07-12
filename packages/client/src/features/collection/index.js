@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const TrainerCollection = (props) => {
+const Collection = (props) => {
     const { collectedItems } = props
     return (<div className='trainerHome page'>
         {collectedItems.length > 0
@@ -12,10 +12,10 @@ const TrainerCollection = (props) => {
         :
         <div className='emptyCollection page flexColumnCenter'>
             <p>No items in your collection!</p>
-            <Link className='button' to='/add-items'>Add Items</Link>
+            <Link className='button' to='/import'>Add Items</Link>
         </div>
         }
     </div>)
 }
 
-export default TrainerCollection
+export default Collection
