@@ -13,7 +13,7 @@ const CardsToolbar = (props) => {
     return (<div className='cardsSidebar sidebar'>
         <h2>Current Set: {setId}</h2>
         <button onClick={backToSets}>Back to Sets</button>
-        <div className='buttonDiv'>
+        <div>
             <p>POST selected set's cards to Cards Table</p>
             <button onClick={handlePostCardsToCards}>POST</button>
         </div>

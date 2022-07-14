@@ -27,15 +27,15 @@ const SetsToolbar = (props) => {
     }
 
     return (<div className='setsSidebar sidebar'>
-        <div className='buttonDiv'>
+        <div>
             <p>POST all sets to Sets Table</p>
             <button onClick={handlePostSetsToSets}>POST Sets</button>
         </div>
-        <div className='buttonDiv'>
+        <div>
             <p>POST all cards to cards Table</p>
             <button onClick={handlePostAllCardsToCards}>POST cards</button>
         </div>
-        <div className='buttonDiv'>
+        <div>
             <p>Log card price types</p>
             <form onSubmit={handleFindPriceTypes}>
                 <input name='bottomIndex' value={priceTypeFormValues.bottomIndex} type='number' onChange={handleChange}/>
