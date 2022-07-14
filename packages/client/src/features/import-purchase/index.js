@@ -42,10 +42,10 @@ const ImportPurchase = (props) => {
         let updateTotal = purchaseValues.total
         const idx = parseInt(id)
         
-        if (name === 'quantity' || name === 'retail') {
+        if (name === 'quantity' || name === 'retail' || name === 'notes') {
             if (name === 'quantity') {
                 value = Math.ceil(value)
-            } else {
+            } else if (name === 'retail') {
                 value = Math.round(value*100) /100
             }
             updateItemCount = 0
