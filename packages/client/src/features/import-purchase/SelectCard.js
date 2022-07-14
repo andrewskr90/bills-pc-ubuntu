@@ -1,13 +1,13 @@
 import React from 'react'
 
 const SelectCard = (props) => {
-    const { addItemModalState, handleSearchFilterChange, handleSelectSet, handleSelectCard } = props
+    const { selectItemModalState, handleSearchFilterChange, selectSet, handleSelectCard } = props
     const { 
         itemType,
         cardFilterValue, 
         filteredSets,
-        selectedSetCards
-    } = addItemModalState
+        selectedSetCards,
+    } = selectItemModalState
 
     return (<div className={itemType === 'card' ? 'addCardToTransaction':'hidden'}>
         <label>Filter By</label>
@@ -25,7 +25,7 @@ const SelectCard = (props) => {
                 <div className={cardFilterValue ? 'filterResults' : 'hidden'}>
                     {filteredSets.map(set => {
                         return <div 
-                            onClick={handleSelectSet} 
+                            onClick={() => selectSet(set)} 
                             className='filterResult' 
                             id={set.cardDataIndex} 
                             key={set.cardDataIndex}
@@ -37,13 +37,14 @@ const SelectCard = (props) => {
             </div>
         </div>
         <div className={selectedSetCards.length > 0 ? 'selectedSetCardsComponent' : 'hidden'}>
-            {selectedSetCards.map((card, idx) => {
+            {selectedSetCards.map((card) => {
+                const { card_image_small, card_id } = card
                 return <img 
-                    src={card.card_image_small} 
-                    onClick={handleSelectCard} 
+                    src={card_image_small} 
+                    onClick={() => handleSelectCard(card)} 
                     className='selectedSetCard' 
-                    id={idx} 
-                    key={card.card_id} 
+                    id={card_id} 
+                    key={card_id} 
                 />
             })}
         </div>
