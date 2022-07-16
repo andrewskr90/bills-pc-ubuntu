@@ -41,8 +41,8 @@ const PurchaseTable = (props) => {
                 id={idx}
                 className='notes'
                 type='text'
-                name='notes'
-                value={purchaseValues.cards[idx].notes}
+                name='cardNotes'
+                value={purchaseValues.cards[idx].cardNotes}
                 onChange={updatePurchaseValues}
             />
             <button id={card_id} onClick={removeCardFromPurchase}>x</button>

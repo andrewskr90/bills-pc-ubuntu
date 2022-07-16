@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import BillsPcService from '../../api/bills-pc'
 
 const PurchaseDetails = (props) => {
     const { purchaseValues, updatePurchaseValues } = props
@@ -8,9 +9,13 @@ const PurchaseDetails = (props) => {
 
     const handleImportPurchase = (e) => {
         e.preventDefault()
-        console.log(isNaN(''))
 
-        console.log(purchaseValues)
+        BillsPcService.postPurchase(purchaseValues)
+            .then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+            })
     }
 
     return (<div className='purchaseDetails'>
@@ -33,6 +38,17 @@ const PurchaseDetails = (props) => {
                 name='vendor'
                 type='text'
                 value={purchaseValues.vendor}
+                onChange={updatePurchaseValues}
+            />
+        </div>
+        <div>
+            <p>Notes</p>
+            <input 
+                id='saleNotes'
+                className=''
+                name='saleNotes'
+                type='text'
+                value={purchaseValues.saleNotes}
                 onChange={updatePurchaseValues}
             />
         </div>
