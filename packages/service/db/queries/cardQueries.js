@@ -4,7 +4,7 @@ const QueryFormatters = require('../../utils/QueryFormatters')
 //find, add, update, remove verbage
 
 const addCardsMySQL = async (req, res, next) => {
-    const cards = req.body
+    const cards = req.cards
     const query = QueryFormatters.objectsToInsert(cards, 'cards')
     connection.query(query, (err, results) => {
         if (err) {
@@ -22,6 +22,7 @@ const addCardsMySQL = async (req, res, next) => {
 const getCardsBySetIdMySQL = async (req, res, next) => {
     const setId = req.params.setId
     const query = `SELECT * FROM cards WHERE card_set_id = '${setId}'`
+
     connection.query(query, (err, results) => {
         if (err) {
             return next(err)

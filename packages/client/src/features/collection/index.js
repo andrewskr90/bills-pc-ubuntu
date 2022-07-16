@@ -12,7 +12,9 @@ const Collection = (props) => {
         :
         <div className='emptyCollection page flexColumnCenter'>
             <p>No items in your collection!</p>
-            <Link className='button' to='/import'>Add Items</Link>
+            <Link to='/import'>
+                <button>Add Items</button>
+            </Link>
         </div>
         }
     </div>)

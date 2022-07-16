@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const { v4: uuidV4 } = require('uuid')
 
 const isOnlyLetters = (string) => {
     return /^[a-zA-Z]+$/.test(string)
@@ -36,6 +37,7 @@ const formatUser = (req, res, next) => {
     const { user_name, user_email, user_password, user_favorite_gen } = req.body
 
     const formattedUser = {
+        user_id: uuidV4(),
         user_name,
         user_password,
         user_role: 'Trainer',

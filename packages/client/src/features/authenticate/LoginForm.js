@@ -56,7 +56,7 @@ const LoginForm = (props) => {
                     onChange={handleChange}
                 />
             </div>
-            <button className='button'>Submit</button>
+            <button>Login</button>
         </form>
         <p className='error'>{errorMessage}</p>
     </div>)

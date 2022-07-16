@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
-import CardManager from '../pages/GymLeaderHome.js'
+import CardManager from '../features/gym-leader/CardManager'
 import '../styles/GymLeader.less'
 
 const GymLeaderHome = () => {
