@@ -1,6 +1,6 @@
 import PtcgioService from '../../../api/pokemon-tcg-io'
 
-const formatCardsArray = (cardsArray) => {
+const formatCardsArray = (cardsArray, set_id) => {
     let nationalDexNumbersValue
     let regulationMarkValue
     let flavorTextValue
@@ -42,7 +42,7 @@ const formatCardsArray = (cardsArray) => {
         }
 
         const formattedCard = {
-            card_set_id: card.set.id,
+            card_set_id: set_id,
             card_name: card.name,
             card_number: card.number,
             card_image_small: card.images.small,

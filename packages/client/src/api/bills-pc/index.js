@@ -18,6 +18,13 @@ const BillsPcService = {
             url: `/api/v1/sets`
         })
     },
+    getSetsBy(filter) {
+        return axios({
+            ...options,
+            url: `/api/v1/sets`,
+            params: filter
+        })
+    },
     postSetsToSets(setsArray) {
         return axios({
             ...options,
@@ -52,6 +59,22 @@ const BillsPcService = {
             ...options,
             url: 'api/v1/auth',
             method: 'post'
+        })
+    },
+    postPurchase(purchase) {
+        return axios({
+            ...options,
+            url: 'api/v1/purchases',
+            method: 'post',
+            data: purchase
+        })
+    },
+    postSale(sale) {
+        return axios({
+            ...options,
+            url: 'api/v1/sales',
+            method: 'post',
+            data: sale
         })
     }
 }
