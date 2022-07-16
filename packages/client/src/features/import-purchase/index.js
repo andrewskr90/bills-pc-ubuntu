@@ -15,7 +15,8 @@ const initialPurchaseValues = {
     shipping: 0,
     taxRate: 0,
     taxAmount: 0,
-    total: 0
+    total: 0,
+    saleNotes: ''
 }
 
 const ImportPurchase = (props) => {
@@ -28,7 +29,7 @@ const ImportPurchase = (props) => {
 
     const updatePurchaseValues = (e) => {
         let { name, value, id } = e.target
-        
+
         let updateDate = purchaseValues.date
         let updateVendor = purchaseValues.vendor
         let updateCards = purchaseValues.cards
@@ -40,9 +41,10 @@ const ImportPurchase = (props) => {
         let updateTaxRate = purchaseValues.taxRate
         let updateTaxAmount = purchaseValues.taxAmount
         let updateTotal = purchaseValues.total
+        let updateSaleNotes = purchaseValues.saleNotes
         const idx = parseInt(id)
-        
-        if (name === 'quantity' || name === 'retail' || name === 'notes') {
+
+        if (name === 'quantity' || name === 'retail' || name === 'cardNotes') {
             if (name === 'quantity') {
                 value = Math.ceil(value)
             } else if (name === 'retail') {
@@ -55,10 +57,12 @@ const ImportPurchase = (props) => {
                     if (name === 'quantity') {
                         updateItemCount += value
                         updateSubtotal += value * card.retail
-                    }
-                    if (name === 'retail') {
+                    } else if (name === 'retail') {
                         updateItemCount += card.quantity
                         updateSubtotal += value * card.quantity
+                    } else {
+                        updateItemCount += card.quantity
+                        updateSubtotal += card.retail * card.quantity
                     }
                     const updatedCard = {
                         ...card,
@@ -71,6 +75,7 @@ const ImportPurchase = (props) => {
                     return card
                 }
             })    
+
             updateSubtotal = Math.round(updateSubtotal*100) /100
             updateTotal = updateSubtotal
         } else if (name === 'date') {
@@ -85,13 +90,17 @@ const ImportPurchase = (props) => {
             updateTaxRate = Math.round(value*100) /100
         } else if (name === 'taxAmount') {
             updateTax = Math.round(value*100) /100
-        } else if (name = 'total') {
-            console.log('here')
+        } else if (name === 'total') {
             updateTotal = Math.round(value*100) /100
+        } else if (name === 'saleNotes') {
+            updateSaleNotes = value
         }
+
         let beforeTax = updateSubtotal-updateDiscount+updateShipping
-        updateTaxRate = Math.round((updateTotal - beforeTax) / (beforeTax)*10000) / 100
-        updateTaxAmount = Math.round((updateTotal - beforeTax)*100) /100
+        if (beforeTax > 0) {
+            updateTaxRate = Math.round((updateTotal - beforeTax) / (beforeTax)*10000) / 100
+            updateTaxAmount = Math.round((updateTotal - beforeTax)*100) /100
+        }
         
         setPurchaseValues({
             date: updateDate,
@@ -104,7 +113,8 @@ const ImportPurchase = (props) => {
             shipping: updateShipping,
             taxRate: updateTaxRate,
             taxAmount: updateTaxAmount,
-            total: updateTotal
+            total: updateTotal,
+            saleNotes: updateSaleNotes
         })
     }
 

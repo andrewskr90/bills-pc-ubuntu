@@ -18,7 +18,8 @@ const PurchaseItems = (props) => {
         const purchasedCard = {
             ...card,
             quantity: 1,
-            retail: 0
+            retail: 0,
+            cardNotes: ''
         }
         let itemCount = purchaseValues.itemCount + 1
         setPurchaseValues({
