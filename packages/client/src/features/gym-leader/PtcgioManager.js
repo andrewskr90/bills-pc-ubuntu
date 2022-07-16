@@ -42,8 +42,7 @@ const PtcgioManager = () => {
     }
 
     const postSetCardsToBPC = async (cards) => {
-        const formattedCardsArray = formatCardsArray(cards)
-        await BillsPcService.postCardsToCards(formattedCardsArray)
+        BillsPcService.postCardsToCards(cards)
             .then(res => {
                 console.log(res)
             })
@@ -58,9 +57,19 @@ const PtcgioManager = () => {
 
     const handlePostAllCardsToCards = async () => {
         for (let i=0; i<ptcgioSets.length; i++) {
-            await PtcgioService.getCardsFromSet(ptcgioSets[i].id)
-                .then(res => postSetCardsToBPC(res.data.data))
+            const set_ptcgio_id = ptcgioSets[i].id
+            let set_id
+            let cardsFromSet
+            
+            await BillsPcService.getSetsBy({ set_ptcgio_id })
+                .then(res => {
+                    set_id = res.data[0].set_id
+                })
+            await PtcgioService.getCardsFromSet(set_ptcgio_id)
+                .then(res => cardsFromSet = res.data.data)
                 .catch(err => console.log(err))
+            const formattedCardsArray = formatCardsArray(cardsFromSet, set_id)
+            postSetCardsToBPC(formattedCardsArray)
             await new Promise(resolve => {
                 setTimeout(() => {
                     resolve()
