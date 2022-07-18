@@ -10,7 +10,7 @@ const PurchaseDetails = (props) => {
     const handleImportPurchase = (e) => {
         e.preventDefault()
 
-        BillsPcService.postPurchase(purchaseValues)
+        BillsPcService.postSale(purchaseValues)
             .then(res => {
                 console.log(res)
             }).catch(err => {
@@ -42,13 +42,13 @@ const PurchaseDetails = (props) => {
             />
         </div>
         <div>
-            <p>Notes</p>
+            <p>Note</p>
             <input 
-                id='saleNotes'
+                id='saleNote'
                 className=''
-                name='saleNotes'
+                name='saleNote'
                 type='text'
-                value={purchaseValues.saleNotes}
+                value={purchaseValues.saleNote}
                 onChange={updatePurchaseValues}
             />
         </div>

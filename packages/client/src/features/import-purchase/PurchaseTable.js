@@ -8,7 +8,7 @@ const PurchaseTable = (props) => {
         <p className='image'>Item</p>
         <p className='quantity'>Qty</p>
         <p className='retail'>Retail</p>
-        <p className='notes'>Notes</p>
+        <p className='note'>Note</p>
         <button onClick={() => setAddItemModal(true)}>+</button>
     </div>
     {purchaseValues.cards.map((card, idx) => {
@@ -39,10 +39,10 @@ const PurchaseTable = (props) => {
             />
             <input 
                 id={idx}
-                className='notes'
+                className='note'
                 type='text'
-                name='cardNotes'
-                value={purchaseValues.cards[idx].cardNotes}
+                name='cardNote'
+                value={purchaseValues.cards[idx].cardNote}
                 onChange={updatePurchaseValues}
             />
             <button id={card_id} onClick={removeCardFromPurchase}>x</button>
