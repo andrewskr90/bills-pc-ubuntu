@@ -34,7 +34,7 @@ const PurchaseItems = (props) => {
     }    
 
     const removeCardFromPurchase = (e) => {
-        const id = parseInt(e.target.id)
+        const id = e.currentTarget.id
         const filteredArray = purchaseValues.cards.filter(card => {
             if (id === card.card_id) {
                 return false
