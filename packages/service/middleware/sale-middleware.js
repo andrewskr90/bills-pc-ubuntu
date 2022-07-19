@@ -141,16 +141,15 @@ const formatSaleCards = (req, res, next) => {
 }
 
 const compileSaleResults = (req, res, next) => {
-    // console.log('start')
-    // console.log(req.addCollectedCardNotesResults)
-    // console.log(req.addCollectedCardsResults)
-    // console.log(req.addSalesResults)
-    // console.log(req.addSaleCardsResults)
-    // console.log(req.addSaleNotesResults)
-    // console.log('end')
-
-    //TODO make sql queries asynchronous
-    //check that each query successfully adds each necessary row
+    const results = {
+        addedCollectedCards: req.addCollectedCardsResults.affectedRows,
+        addedCollectedCardNotes: req.addCollectedCardNotesResults.affectedRows,
+        addedSales: req.addSalesResults.affectedRows,
+        addedSaleCards:  req.addSaleCardsResults.affectedRows,
+        addedSaleNotes: req.addSaleNotesResults.affectedRows
+    }
+    req.results = results
+    // TODO: check that each query successfully adds each necessary row
     next()
 }
 

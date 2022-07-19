@@ -25,13 +25,13 @@ saleRouter.post('/',
     formatCollectedCardNotes,
     formatSaleCards,
     addCollectedCardsMySQL,
+    addCollectedCardNotesMySQL,
     addSalesMySQL,
     addSaleCardsMySQL,
     addSaleNotesMySQL,
-    addCollectedCardNotesMySQL,
     compileSaleResults,
     (req, res, next) => {
-        res.status(200).json(req.saleType)
+        res.status(200).json(req.results)
 })
 
 module.exports = saleRouter
