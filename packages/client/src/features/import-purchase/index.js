@@ -16,7 +16,7 @@ const initialPurchaseValues = {
     taxRate: 0,
     taxAmount: 0,
     total: 0,
-    saleNotes: ''
+    saleNote: ''
 }
 
 const ImportPurchase = (props) => {
@@ -41,10 +41,10 @@ const ImportPurchase = (props) => {
         let updateTaxRate = purchaseValues.taxRate
         let updateTaxAmount = purchaseValues.taxAmount
         let updateTotal = purchaseValues.total
-        let updateSaleNotes = purchaseValues.saleNotes
+        let updateSaleNote = purchaseValues.saleNote
         const idx = parseInt(id)
 
-        if (name === 'quantity' || name === 'retail' || name === 'cardNotes') {
+        if (name === 'quantity' || name === 'retail' || name === 'cardNote') {
             if (name === 'quantity') {
                 value = Math.ceil(value)
             } else if (name === 'retail') {
@@ -60,7 +60,9 @@ const ImportPurchase = (props) => {
                     } else if (name === 'retail') {
                         updateItemCount += card.quantity
                         updateSubtotal += value * card.quantity
-                    } else {
+                    } else if (name === 'cardNote') {
+                        //TODO: card notes need to be in an array
+                        //when handling the sale in the backend
                         updateItemCount += card.quantity
                         updateSubtotal += card.retail * card.quantity
                     }
@@ -92,8 +94,8 @@ const ImportPurchase = (props) => {
             updateTax = Math.round(value*100) /100
         } else if (name === 'total') {
             updateTotal = Math.round(value*100) /100
-        } else if (name === 'saleNotes') {
-            updateSaleNotes = value
+        } else if (name === 'saleNote') {
+            updateSaleNote = value
         }
 
         let beforeTax = updateSubtotal-updateDiscount+updateShipping
@@ -114,7 +116,7 @@ const ImportPurchase = (props) => {
             taxRate: updateTaxRate,
             taxAmount: updateTaxAmount,
             total: updateTotal,
-            saleNotes: updateSaleNotes
+            saleNote: updateSaleNote
         })
     }
 

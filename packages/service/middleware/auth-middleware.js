@@ -68,7 +68,7 @@ const createSession = (req, res, next) => {
     }
     req.claims = claims
     const jwtOptions = {
-        expiresIn: '2h'
+        expiresIn: '8h'
     }
     try {
         const sessionJwt = jwt.sign(claims, process.env.JWT_SECRET, jwtOptions)

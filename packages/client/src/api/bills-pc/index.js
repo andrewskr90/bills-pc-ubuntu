@@ -61,14 +61,6 @@ const BillsPcService = {
             method: 'post'
         })
     },
-    postPurchase(purchase) {
-        return axios({
-            ...options,
-            url: 'api/v1/purchases',
-            method: 'post',
-            data: purchase
-        })
-    },
     postSale(sale) {
         return axios({
             ...options,
