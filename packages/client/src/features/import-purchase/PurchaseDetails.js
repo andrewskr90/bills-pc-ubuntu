@@ -13,6 +13,7 @@ const PurchaseDetails = (props) => {
         BillsPcService.postSale(purchaseValues)
             .then(res => {
                 console.log(res)
+                navigate('/')
             }).catch(err => {
                 console.log(err)
             })
