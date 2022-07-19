@@ -3,21 +3,26 @@ const QueryFormatters = require('../../utils/QueryFormatters')
 
 const addCollectedCardNotesMySQL = async (req, res, next) => {
     const collectedCardNotes = req.collectedCardNotes
-    const queryString = QueryFormatters.objectsToInsert(collectedCardNotes, 'collected_card_notes')
-    const query = new Promise((resolve, reject) => {
-        connection.query(queryString, (err, results) => {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(results)
-            }
+    if (collectedCardNotes.length > 0) {
+        const queryString = QueryFormatters.objectsToInsert(collectedCardNotes, 'collected_card_notes')
+        const query = new Promise((resolve, reject) => {
+            connection.query(queryString, (err, results) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(results)
+                }
+            })
         })
-    })
-    try {
-        req.addCollectedCardNotesResults = await query
-        return next()
-    } catch (err) {
-        next(err)
+        try {
+            req.addCollectedCardNotesResults = await query
+            return next()
+        } catch (err) {
+            next(err)
+        }
+    } else {
+        req.addCollectedCardNotesResults = { affectedRows: 0 }
+        next()
     }
 }
 
