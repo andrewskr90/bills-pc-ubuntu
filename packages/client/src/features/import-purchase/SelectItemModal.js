@@ -103,8 +103,7 @@ const SelectItemModal = (props) => {
     }
 
     return (<div className='modal addItemModal'>
-        <div className='modalContent flexColumnSpaceCenter'>
-            <div>
+        <div className='modalContent'>
                 {/* select card or product */}
                 <div className='itemTypeButtons'>
                     <button 
@@ -133,7 +132,6 @@ const SelectItemModal = (props) => {
                 <div className={selectItemModalState.itemType === 'product' ? 'addProductToTransaction':'hidden'}>
                     <p>Feature Not Available.</p>
                 </div>    
-            </div>
             <button className='modalClose' onClick={() => setAddItemModal(false)}>X</button>      
         </div>
     </div>
