@@ -57,16 +57,22 @@ const BillsPcService = {
     authenticateSession() {
         return axios({
             ...options,
-            url: 'api/v1/auth',
+            url: '/api/v1/auth',
             method: 'post'
         })
     },
     postSale(sale) {
         return axios({
             ...options,
-            url: 'api/v1/sales',
+            url: '/api/v1/sales',
             method: 'post',
             data: sale
+        })
+    },
+    getCollectedCards() {
+        return axios({
+            ...options,
+            url: '/api/v1/collected-cards'
         })
     }
 }
