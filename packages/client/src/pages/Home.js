@@ -14,10 +14,14 @@ const initialReferenceDataValues = {
 
 const Home = (props) => {
     const { userClaims } = props
-    const [collectedItems, setCollectedItems] = useState([])
+    const [collectedCards, setCollectedCards] = useState([])
     const [referenceData, setReferenceData] = useState(initialReferenceDataValues)
 
     useEffect(() => {
+        BillsPcService.getCollectedCards()
+            .then(res => {
+                setCollectedCards(res.data)
+            })
         BillsPcService.getSets()
             .then(res => {
                 setReferenceData({
@@ -27,6 +31,7 @@ const Home = (props) => {
             }).catch(err => {
                 console.log(err)
             })
+        
     }, [])
     
     return (<div className='home'>
@@ -34,11 +39,11 @@ const Home = (props) => {
             <h1>Kyle's PC</h1>
         </header>
         <Routes>
-            <Route path='/' element={<Collection collectedItems={collectedItems} />} />
+            <Route path='/' element={<Collection collectedCards={collectedCards} />} />
             <Route 
                 path='/import/*' 
                 element={<ImportPurchase 
-                    setCollectedItems={setCollectedItems} 
+                    setCollectedItems={setCollectedCards} 
                     referenceData={referenceData}
                     setReferenceData={setReferenceData}
                 />} 

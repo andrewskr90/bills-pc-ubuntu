@@ -1,18 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import CollectedCard from './CollectedCard'
+import './assets/collection.less'
 
 const Collection = (props) => {
-    const { collectedItems } = props
-
-    useEffect(() => {
-        console.log('hereeeee')
-    }, [])
+    const { collectedCards } = props
     
-    return (<div className='trainerHome page'>
-        {collectedItems.length > 0
+    return (<div className='collection'>
+        {collectedCards.length > 0
         ?
-        <div className='collection'>
-            
+        
+        <div className='collectedCardsSection'>
+            <h3>Collected Cards</h3>
+            <div className='collectedCards'>
+                {collectedCards.map(collectedCard => {
+                    return <CollectedCard collectedCard={collectedCard} />
+                })}
+            </div>
         </div>
         :
         <div className='emptyCollection page flexColumnCenter'>
